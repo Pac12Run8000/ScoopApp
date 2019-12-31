@@ -46,7 +46,7 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-x5-NTA">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ucb-x5-NTA" customClass="RoundImageView" customModule="ScoopApp" customModuleProvider="target">
                                         <rect key="frame" x="374" y="30" width="30" height="30"/>
                                         <color key="backgroundColor" red="0.42745098040000001" green="0.56078431370000004" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
