@@ -15,6 +15,7 @@
 		09311C5A23B9CCFD007A5126 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09311C5823B9CCFD007A5126 /* LaunchScreen.storyboard */; };
 		098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEE823BBC5D90024E38B /* GradientView.swift */; };
 		098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEEA23BBF69E0024E38B /* RoundImageView.swift */; };
+		098FCEEF23BBF9020024E38B /* RoundedShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEEE23BBF9020024E38B /* RoundedShadowView.swift */; };
 		8B67CC8EC2FBB591E57031BF /* Pods_ScoopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32637191782EE8605454D /* Pods_ScoopApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		09311C5B23B9CCFD007A5126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		098FCEE823BBC5D90024E38B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		098FCEEA23BBF69E0024E38B /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
+		098FCEEE23BBF9020024E38B /* RoundedShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowView.swift; sourceTree = "<group>"; };
 		1B9A708A3742E59B6B717623 /* Pods-ScoopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoopApp.debug.xcconfig"; path = "Target Support Files/Pods-ScoopApp/Pods-ScoopApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4DA4153F3D899A9ABA12AC91 /* Pods-ScoopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoopApp.release.xcconfig"; path = "Target Support Files/Pods-ScoopApp/Pods-ScoopApp.release.xcconfig"; sourceTree = "<group>"; };
 		5BA32637191782EE8605454D /* Pods_ScoopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 			children = (
 				098FCEE823BBC5D90024E38B /* GradientView.swift */,
 				098FCEEA23BBF69E0024E38B /* RoundImageView.swift */,
+				098FCEEE23BBF9020024E38B /* RoundedShadowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -238,6 +241,7 @@
 			files = (
 				098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */,
 				09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */,
+				098FCEEF23BBF9020024E38B /* RoundedShadowView.swift in Sources */,
 				09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */,
 				098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */,
 				09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */,
