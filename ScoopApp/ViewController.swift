@@ -7,14 +7,30 @@
 //
 
 import UIKit
+import MapKit
 
 class ViewController: UIViewController {
+    
+    
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
+    let gradient = CAGradientLayer()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        
+        mapView.delegate = self
        
     }
 
 
+}
+
+
+extension ViewController:MKMapViewDelegate {
+    
 }
 

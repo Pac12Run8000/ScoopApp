@@ -55,7 +55,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="f5i-AQ-zDK" firstAttribute="centerY" secondItem="hIK-Px-yFg" secondAttribute="centerY" id="2Fs-qx-P9B"/>
                                     <constraint firstAttribute="height" constant="90" id="3EJ-98-2mb"/>
@@ -161,6 +161,9 @@
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mapView" destination="eeR-G7-wcS" id="NET-gz-osq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
