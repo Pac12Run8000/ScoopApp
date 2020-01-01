@@ -12,7 +12,7 @@ import MapKit
 class ViewController: UIViewController {
     
     
-    
+    @IBOutlet weak var actionButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var mapView: MKMapView!
     
     let gradient = CAGradientLayer()
@@ -26,7 +26,10 @@ class ViewController: UIViewController {
        
     }
 
-
+    @IBAction func actionButtonWasPressed(_ sender: Any) {
+        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+    }
+    
 }
 
 

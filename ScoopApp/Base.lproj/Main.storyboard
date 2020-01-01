@@ -66,17 +66,32 @@
                                     <constraint firstItem="MsY-gs-4qV" firstAttribute="centerY" secondItem="hIK-Px-yFg" secondAttribute="centerY" id="xjK-ap-nJd"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fte-iK-wJA">
-                                <rect key="frame" x="20" y="743" width="374" height="60"/>
-                                <color key="backgroundColor" red="0.0039215686274509803" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fdM-Mw-dd8">
+                                <rect key="frame" x="0.0" y="718" width="414" height="95"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fte-iK-wJA" customClass="RoundedShadowButton" customModule="ScoopApp" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="17" width="374" height="60"/>
+                                        <color key="backgroundColor" red="0.0039215686274509803" green="0.15686274509803921" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="kWe-q9-plF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="30"/>
+                                        <state key="normal" title="Request Ride">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="actionButtonWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Rs-BJ-qUI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="kUb-Fg-vVN"/>
+                                    <constraint firstAttribute="height" constant="95" id="2RX-H5-ZvT"/>
+                                    <constraint firstAttribute="bottom" secondItem="Fte-iK-wJA" secondAttribute="bottom" constant="18" id="Qny-Ys-Inv"/>
+                                    <constraint firstAttribute="trailing" secondItem="Fte-iK-wJA" secondAttribute="trailing" constant="20" id="m6G-ET-ktS"/>
+                                    <constraint firstItem="Fte-iK-wJA" firstAttribute="leading" secondItem="fdM-Mw-dd8" secondAttribute="leading" constant="20" id="tYU-tR-7Pm"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AvenirNext-Heavy" family="Avenir Next" pointSize="30"/>
-                                <state key="normal" title="Request Ride">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sdc-Gx-pOP">
                                 <rect key="frame" x="332" y="673" width="62" height="62"/>
                                 <constraints>
@@ -146,18 +161,18 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Fte-iK-wJA" secondAttribute="bottom" constant="10" id="7bD-8A-Ga6"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Fte-iK-wJA" secondAttribute="trailing" constant="20" id="7yK-F3-g4P"/>
+                            <constraint firstItem="fdM-Mw-dd8" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="A7d-Nw-gSP"/>
+                            <constraint firstItem="fdM-Mw-dd8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IbV-sp-SqI"/>
                             <constraint firstItem="hIK-Px-yFg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JQu-zi-Fw6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eeR-G7-wcS" secondAttribute="trailing" id="JXR-rJ-UfJ"/>
                             <constraint firstItem="ygw-aF-WCi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="Nb0-ac-7td"/>
-                            <constraint firstItem="Fte-iK-wJA" firstAttribute="top" secondItem="Sdc-Gx-pOP" secondAttribute="bottom" constant="8" id="QAw-re-pNQ"/>
+                            <constraint firstItem="fdM-Mw-dd8" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Nzn-B6-ifA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sdc-Gx-pOP" secondAttribute="trailing" constant="20" id="VhL-m3-q7P"/>
                             <constraint firstItem="eeR-G7-wcS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Z1m-cT-IjW"/>
                             <constraint firstItem="eeR-G7-wcS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZAh-mT-mqO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hIK-Px-yFg" secondAttribute="trailing" id="ea4-eG-R9J"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Sdc-Gx-pOP" secondAttribute="bottom" constant="78" id="gBh-2c-JVZ"/>
                             <constraint firstItem="ygw-aF-WCi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="i3v-Ns-Bu1"/>
-                            <constraint firstItem="Fte-iK-wJA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="p7A-0t-qZn"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ygw-aF-WCi" secondAttribute="trailing" constant="20" id="sJB-wv-MXr"/>
                             <constraint firstItem="hIK-Px-yFg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="yvs-bs-wmf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eeR-G7-wcS" secondAttribute="bottom" id="z80-dG-pTl"/>
@@ -167,6 +182,7 @@
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="actionButtonOutlet" destination="Fte-iK-wJA" id="7rq-e5-Efa"/>
                         <outlet property="mapView" destination="eeR-G7-wcS" id="NET-gz-osq"/>
                     </connections>
                 </viewController>
