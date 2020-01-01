@@ -28,6 +28,7 @@ class ViewController: UIViewController {
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
         actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+        
     }
     
 }
