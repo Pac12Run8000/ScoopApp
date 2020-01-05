@@ -44,7 +44,7 @@ class ContainerVC: UIViewController {
         initCenter(screen: showVC)
         
     }
-    
+        
 
     func initCenter(screen: ShowWhichVC) {
         var presentingController:UIViewController
@@ -159,7 +159,7 @@ extension ContainerVC: CenterVCDelegate {
     }
     
     func animatePanelXPosition(targetPosition:CGFloat, completion: ((Bool) -> Void)! = nil) {
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+        UIView.animate(withDuration: 1.0, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
             self.centerController.view.frame.origin.x = targetPosition
         }, completion: completion)
     }
