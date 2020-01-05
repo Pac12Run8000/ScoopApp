@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ScoopApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="ScoopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,6 +28,9 @@
                                             <constraint firstAttribute="width" constant="46" id="jqZ-eQ-0HC"/>
                                         </constraints>
                                         <state key="normal" title="Button" image="menuSliderBtn"/>
+                                        <connections>
+                                            <action selector="menuButtonPressedAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E4R-by-kzw"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f5i-AQ-zDK">
                                         <rect key="frame" x="145" y="26" width="124" height="38.5"/>
@@ -190,10 +193,10 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="70.982142857142847"/>
         </scene>
-        <!--View Controller-->
+        <!--Left Side PanelVC-->
         <scene sceneID="VGz-lR-a6d">
             <objects>
-                <viewController id="wd3-Fi-22Y" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeftSidePanelVC" id="wd3-Fi-22Y" customClass="LeftSidePanelVC" customModule="ScoopApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DdI-Ko-44r">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

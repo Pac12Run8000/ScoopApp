@@ -13,11 +13,14 @@
 		09311C5523B9CCFC007A5126 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09311C5323B9CCFC007A5126 /* Main.storyboard */; };
 		09311C5723B9CCFD007A5126 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09311C5623B9CCFD007A5126 /* Assets.xcassets */; };
 		09311C5A23B9CCFD007A5126 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09311C5823B9CCFD007A5126 /* LaunchScreen.storyboard */; };
+		0931B72023BE8CD700E95F01 /* CenterVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0931B71F23BE8CD700E95F01 /* CenterVCDelegate.swift */; };
 		098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEE823BBC5D90024E38B /* GradientView.swift */; };
 		098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEEA23BBF69E0024E38B /* RoundImageView.swift */; };
 		098FCEEF23BBF9020024E38B /* RoundedShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEEE23BBF9020024E38B /* RoundedShadowView.swift */; };
 		098FCEF123BBFC0D0024E38B /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF023BBFC0D0024E38B /* CircleView.swift */; };
 		098FCEF323BC03FC0024E38B /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF223BC03FC0024E38B /* RoundedShadowButton.swift */; };
+		098FCEF523BD19EA0024E38B /* LeftSidePanelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */; };
+		098FCEF723BD23E30024E38B /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF623BD23E30024E38B /* ContainerVC.swift */; };
 		8B67CC8EC2FBB591E57031BF /* Pods_ScoopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32637191782EE8605454D /* Pods_ScoopApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -30,11 +33,14 @@
 		09311C5623B9CCFD007A5126 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09311C5923B9CCFD007A5126 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09311C5B23B9CCFD007A5126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0931B71F23BE8CD700E95F01 /* CenterVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterVCDelegate.swift; sourceTree = "<group>"; };
 		098FCEE823BBC5D90024E38B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		098FCEEA23BBF69E0024E38B /* RoundImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundImageView.swift; sourceTree = "<group>"; };
 		098FCEEE23BBF9020024E38B /* RoundedShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowView.swift; sourceTree = "<group>"; };
 		098FCEF023BBFC0D0024E38B /* CircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		098FCEF223BC03FC0024E38B /* RoundedShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButton.swift; sourceTree = "<group>"; };
+		098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidePanelVC.swift; sourceTree = "<group>"; };
+		098FCEF623BD23E30024E38B /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
 		1B9A708A3742E59B6B717623 /* Pods-ScoopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoopApp.debug.xcconfig"; path = "Target Support Files/Pods-ScoopApp/Pods-ScoopApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4DA4153F3D899A9ABA12AC91 /* Pods-ScoopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoopApp.release.xcconfig"; path = "Target Support Files/Pods-ScoopApp/Pods-ScoopApp.release.xcconfig"; sourceTree = "<group>"; };
 		5BA32637191782EE8605454D /* Pods_ScoopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -73,12 +79,12 @@
 		09311C4C23B9CCFC007A5126 /* ScoopApp */ = {
 			isa = PBXGroup;
 			children = (
+				0931B71E23BE8CAC00E95F01 /* Protocols */,
 				098FCEE723BBC5850024E38B /* Model */,
 				098FCEE623BBC57A0024E38B /* View */,
 				098FCEE523BBC56A0024E38B /* Controller */,
 				09311C4D23B9CCFC007A5126 /* AppDelegate.swift */,
 				09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */,
-				09311C5123B9CCFC007A5126 /* ViewController.swift */,
 				09311C5323B9CCFC007A5126 /* Main.storyboard */,
 				09311C5623B9CCFD007A5126 /* Assets.xcassets */,
 				09311C5823B9CCFD007A5126 /* LaunchScreen.storyboard */,
@@ -87,9 +93,20 @@
 			path = ScoopApp;
 			sourceTree = "<group>";
 		};
+		0931B71E23BE8CAC00E95F01 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0931B71F23BE8CD700E95F01 /* CenterVCDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		098FCEE523BBC56A0024E38B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				09311C5123B9CCFC007A5126 /* ViewController.swift */,
+				098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */,
+				098FCEF623BD23E30024E38B /* ContainerVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -245,9 +262,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				098FCEF523BD19EA0024E38B /* LeftSidePanelVC.swift in Sources */,
 				098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */,
 				09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */,
 				098FCEEF23BBF9020024E38B /* RoundedShadowView.swift in Sources */,
+				0931B72023BE8CD700E95F01 /* CenterVCDelegate.swift in Sources */,
+				098FCEF723BD23E30024E38B /* ContainerVC.swift in Sources */,
 				09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */,
 				098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */,
 				098FCEF123BBFC0D0024E38B /* CircleView.swift in Sources */,

@@ -16,6 +16,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     let gradient = CAGradientLayer()
+    
+    var delegate:CenterVCDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +33,19 @@ class ViewController: UIViewController {
         
     }
     
+    @IBAction func menuButtonPressedAction(_ sender: Any) {
+       
+        delegate?.toggleLeftPanel()
+        
+    }
+    
+    
 }
 
 
 extension ViewController:MKMapViewDelegate {
     
 }
+
+
 
