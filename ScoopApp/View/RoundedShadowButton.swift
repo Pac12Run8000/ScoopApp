@@ -30,7 +30,7 @@ class RoundedShadowButton: UIButton {
         spinner.style = .large
         spinner.color = .white
         spinner.alpha = 0.0
-        spinner.hidesWhenStopped = true
+//        spinner.hidesWhenStopped = true
         spinner.tag = 21
         
         if shouldLoad {
@@ -46,7 +46,7 @@ class RoundedShadowButton: UIButton {
                     
                     spinner.startAnimating()
                     
-                    spinner.center = CGPoint(x: self.frame.width / 2 + 1, y: self.frame.width / 2 + 1)
+                    spinner.center = CGPoint(x: self.frame.width / 2 + 1, y: self.frame.height / 2 + 1)
                     UIView.animate(withDuration: 0.2) {
                         spinner.alpha = 1.0
                     }
