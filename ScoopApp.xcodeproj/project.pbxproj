@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		092BDC1A23C2BCF60089426B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1923C2BCF60089426B /* UIViewExt.swift */; };
 		09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4D23B9CCFC007A5126 /* AppDelegate.swift */; };
 		09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */; };
 		09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C5123B9CCFC007A5126 /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		092BDC1923C2BCF60089426B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		09311C4A23B9CCFC007A5126 /* ScoopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09311C4D23B9CCFC007A5126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -58,6 +60,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		092BDC1823C2BCC80089426B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				092BDC1923C2BCF60089426B /* UIViewExt.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		09311C4123B9CCFC007A5126 = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +89,7 @@
 		09311C4C23B9CCFC007A5126 /* ScoopApp */ = {
 			isa = PBXGroup;
 			children = (
+				092BDC1823C2BCC80089426B /* Extensions */,
 				0931B71E23BE8CAC00E95F01 /* Protocols */,
 				098FCEE723BBC5850024E38B /* Model */,
 				098FCEE623BBC57A0024E38B /* View */,
@@ -262,6 +273,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				092BDC1A23C2BCF60089426B /* UIViewExt.swift in Sources */,
 				098FCEF523BD19EA0024E38B /* LeftSidePanelVC.swift in Sources */,
 				098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */,
 				09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */,
