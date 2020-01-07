@@ -22,6 +22,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     } */
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
        //Make sure to do this else you won't get
@@ -31,6 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let containerVC = ContainerVC()
         window?.rootViewController = containerVC
         window?.makeKeyAndVisible()
+        
         /*
         window?.rootViewController = storyBoard.instantiateInitialViewController()
         window?.makeKeyAndVisible() */

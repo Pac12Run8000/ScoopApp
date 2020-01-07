@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		092BDC1A23C2BCF60089426B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1923C2BCF60089426B /* UIViewExt.swift */; };
+		092BDC1C23C411BE0089426B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1B23C411BE0089426B /* LoginVC.swift */; };
 		09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4D23B9CCFC007A5126 /* AppDelegate.swift */; };
 		09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */; };
 		09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C5123B9CCFC007A5126 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 
 /* Begin PBXFileReference section */
 		092BDC1923C2BCF60089426B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		092BDC1B23C411BE0089426B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		09311C4A23B9CCFC007A5126 /* ScoopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09311C4D23B9CCFC007A5126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				09311C5123B9CCFC007A5126 /* ViewController.swift */,
 				098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */,
 				098FCEF623BD23E30024E38B /* ContainerVC.swift */,
+				092BDC1B23C411BE0089426B /* LoginVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				098FCEF723BD23E30024E38B /* ContainerVC.swift in Sources */,
 				09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */,
 				098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */,
+				092BDC1C23C411BE0089426B /* LoginVC.swift in Sources */,
 				098FCEF123BBFC0D0024E38B /* CircleView.swift in Sources */,
 				09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */,
 				098FCEF323BC03FC0024E38B /* RoundedShadowButton.swift in Sources */,

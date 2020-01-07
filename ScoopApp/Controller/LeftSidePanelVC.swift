@@ -16,7 +16,10 @@ class LeftSidePanelVC: UIViewController {
         
     }
     
-
+    @IBAction func signUpLoginBtnActionPressed(_ sender: Any) {
+        performSegue(withIdentifier: "loginVCSegue", sender: self)
+    }
+    
     
 
 }
