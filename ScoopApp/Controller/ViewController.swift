@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RevealingSplashView
 
 class ViewController: UIViewController {
     
@@ -15,16 +16,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var actionButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var mapView: MKMapView!
     
-    let gradient = CAGradientLayer()
+//    let gradient = CAGradientLayer()
+    
     
     var delegate:CenterVCDelegate?
+    
+    
+    let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: .white)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        
         mapView.delegate = self
+        setupAndStartSplashAnimation()
+       
        
     }
 
@@ -34,9 +39,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func menuButtonPressedAction(_ sender: Any) {
-       
         delegate?.toggleLeftPanel()
-        
     }
     
     
@@ -44,6 +47,17 @@ class ViewController: UIViewController {
 
 
 extension ViewController:MKMapViewDelegate {
+    
+}
+// MARK:- Setting up the splashView functionality
+extension ViewController {
+    
+    func setupAndStartSplashAnimation() {
+        self.view.addSubview(revealingSplashView)
+        revealingSplashView.animationType = SplashAnimationType.heartBeat
+        revealingSplashView.startAnimation()
+        revealingSplashView.heartAttack = true
+    }
     
 }
 
