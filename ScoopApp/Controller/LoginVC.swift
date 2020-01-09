@@ -10,13 +10,21 @@ import UIKit
 
 class LoginVC: UIViewController {
 
+   
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+//        emailTextFieldOutlet.layer.cornerRadius = 30
+//
+//        emailTextFieldOutlet.clipsToBounds = true
     }
     
-
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
 
 }
