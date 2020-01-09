@@ -353,7 +353,7 @@
                                             </segments>
                                             <color key="selectedSegmentTintColor" red="0.0078431372550000003" green="0.451640667" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HoH-7o-elW" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HoH-7o-elW" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
                                             <rect key="frame" x="20" y="358" width="374" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="A9D-XH-4QM"/>
@@ -372,7 +372,7 @@
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                         </button>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C0i-O4-99f" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="C0i-O4-99f" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
                                             <rect key="frame" x="20" y="310" width="374" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="4mL-0z-ma4"/>
