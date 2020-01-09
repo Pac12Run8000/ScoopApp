@@ -1,4 +1,6 @@
 PODS:
+  - Firebase/Analytics (6.14.0):
+    - Firebase/Core
   - Firebase/Auth (6.14.0):
     - Firebase/CoreOnly
     - FirebaseAuth (~> 6.4.1)
@@ -91,6 +93,7 @@ PODS:
   - RevealingSplashView (0.6.0)
 
 DEPENDENCIES:
+  - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
@@ -138,6 +141,6 @@ SPEC CHECKSUMS:
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
   RevealingSplashView: 40c5a770894459736acdc95655eeba0dd30ce91c
 
-PODFILE CHECKSUM: cc444104a8dfe1de84324e005e9581832689dbf0
+PODFILE CHECKSUM: 771648988ec1394b97b7ea2940ee131931a78dd6
 
 COCOAPODS: 1.8.4

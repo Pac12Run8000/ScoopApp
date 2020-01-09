@@ -11,5 +11,6 @@ target 'ScoopApp' do
   pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'RevealingSplashView'
+  pod 'Firebase/Analytics'
 
 end

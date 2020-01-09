@@ -10,6 +10,7 @@
 		092BDC1A23C2BCF60089426B /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1923C2BCF60089426B /* UIViewExt.swift */; };
 		092BDC1C23C411BE0089426B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1B23C411BE0089426B /* LoginVC.swift */; };
 		092BDC1E23C426C30089426B /* RoundedCornerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1D23C426C30089426B /* RoundedCornerTextField.swift */; };
+		092FB09223C7B0840033F75B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 092FB09123C7B0840033F75B /* GoogleService-Info.plist */; };
 		09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4D23B9CCFC007A5126 /* AppDelegate.swift */; };
 		09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */; };
 		09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C5123B9CCFC007A5126 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		092BDC1923C2BCF60089426B /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		092BDC1B23C411BE0089426B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		092BDC1D23C426C30089426B /* RoundedCornerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerTextField.swift; sourceTree = "<group>"; };
+		092FB09123C7B0840033F75B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		09311C4A23B9CCFC007A5126 /* ScoopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09311C4D23B9CCFC007A5126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				09311C5623B9CCFD007A5126 /* Assets.xcassets */,
 				09311C5823B9CCFD007A5126 /* LaunchScreen.storyboard */,
 				09311C5B23B9CCFD007A5126 /* Info.plist */,
+				092FB09123C7B0840033F75B /* GoogleService-Info.plist */,
 			);
 			path = ScoopApp;
 			sourceTree = "<group>";
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09311C5A23B9CCFD007A5126 /* LaunchScreen.storyboard in Resources */,
+				092FB09223C7B0840033F75B /* GoogleService-Info.plist in Resources */,
 				09311C5723B9CCFD007A5126 /* Assets.xcassets in Resources */,
 				09311C5523B9CCFC007A5126 /* Main.storyboard in Resources */,
 			);
