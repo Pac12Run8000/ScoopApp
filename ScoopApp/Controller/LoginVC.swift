@@ -22,16 +22,19 @@ class LoginVC: UIViewController {
     @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
     @IBOutlet weak var authButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var profileImageView: UIImageView!
     
     
     var loginState:LoginState? {
         didSet {
             if loginState == LoginState.Login {
-                animateView(constant: 8, view: self.view, constraint: emailTopConstraint)
-
+                animateConstraint(constant: 8, view: self.view, constraint: emailTopConstraint)
+                animateImageView(hidden: true)
+                animateAuthButton(text: "Login")
             } else if loginState == LoginState.Register {
-                 animateView(constant: 88, view: self.view, constraint: emailTopConstraint)
+                animateConstraint(constant: 88, view: self.view, constraint: emailTopConstraint)
+                animateImageView(hidden: false)
+                animateAuthButton(text: "Register")
             }
         }
     }
@@ -43,6 +46,9 @@ class LoginVC: UIViewController {
         
         emailTextFieldOutlet.delegate = self
         passwordTextFieldOutlet.delegate = self
+        
+        displayImageView()
+        profileImageView.alpha = 0.0
         
     }
     
@@ -88,11 +94,41 @@ extension LoginVC: UITextFieldDelegate {
 // MARK:- Animation functionality
 extension LoginVC {
     
-    func animateView(constant:CGFloat, view:UIView, constraint:NSLayoutConstraint) {
+    func animateAuthButton(text:String) {
+        self.authButtonOutlet.setTitle(text, for: .normal)
+        UIView.animate(withDuration: 0.4) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func animateConstraint(constant:CGFloat, view:UIView, constraint:NSLayoutConstraint) {
         constraint.constant = constant
         UIView.animate(withDuration: 0.4) {
             view.layoutIfNeeded()
         }
+    }
+    
+    func animateImageView(hidden:Bool) {
+        if (profileImageView.alpha == 0.0) {
+           DispatchQueue.main.async {
+               UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                self.profileImageView.alpha = 1.0
+               }, completion: nil)
+           }
+       } else {
+           DispatchQueue.main.async {
+               UIView.animate(withDuration: 0.4, delay: 0.0, options: .curveEaseOut, animations: {
+                self.profileImageView.alpha = 0.0
+               }, completion: nil)
+           }
+       }
+    }
+    
+    func displayImageView() {
+        profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
+        profileImageView.layer.borderColor = UIColor.red.cgColor
+        profileImageView.layer.masksToBounds = true
+        profileImageView.layer.borderWidth = 2
     }
     
 }
