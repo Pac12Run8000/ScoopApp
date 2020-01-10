@@ -9,6 +9,11 @@
 import UIKit
 import Firebase
 
+enum LoginState {
+    case Login
+    case Register
+}
+
 
 class LoginVC: UIViewController {
 
@@ -16,6 +21,20 @@ class LoginVC: UIViewController {
     @IBOutlet weak var passwordTextFieldOutlet: RoundedCornerTextField!
     @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
     @IBOutlet weak var authButtonOutlet: RoundedShadowButton!
+    @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
+    
+    
+    
+    var loginState:LoginState? {
+        didSet {
+            if loginState == LoginState.Login {
+                animateView(constant: 8, view: self.view, constraint: emailTopConstraint)
+
+            } else if loginState == LoginState.Register {
+                 animateView(constant: 88, view: self.view, constraint: emailTopConstraint)
+            }
+        }
+    }
     
     
     override func viewDidLoad() {
@@ -34,8 +53,15 @@ class LoginVC: UIViewController {
    
     
     @IBAction func authButtonAction(_ sender: Any) {
-        
+
     }
+    
+    @IBAction func segmentControlAction(_ sender: Any) {
+        if let segment = sender as? UISegmentedControl {
+            loginState = segment.selectedSegmentIndex == 0 ? LoginState.Login : LoginState.Register
+        }
+    }
+    
     
 }
 
@@ -57,5 +83,16 @@ extension LoginVC {
 // MARK:- Textfield delegate functionality
 extension LoginVC: UITextFieldDelegate {
     
+    
+}
+// MARK:- Animation functionality
+extension LoginVC {
+    
+    func animateView(constant:CGFloat, view:UIView, constraint:NSLayoutConstraint) {
+        constraint.constant = constant
+        UIView.animate(withDuration: 0.4) {
+            view.layoutIfNeeded()
+        }
+    }
     
 }
