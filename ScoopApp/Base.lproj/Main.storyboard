@@ -371,7 +371,7 @@
                                                 <constraint firstAttribute="height" constant="45" id="tVs-Wk-25h"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                            <state key="normal" title="Login">
+                                            <state key="normal">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
