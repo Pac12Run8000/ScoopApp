@@ -11,6 +11,7 @@
 		092BDC1C23C411BE0089426B /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1B23C411BE0089426B /* LoginVC.swift */; };
 		092BDC1E23C426C30089426B /* RoundedCornerTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092BDC1D23C426C30089426B /* RoundedCornerTextField.swift */; };
 		092FB09223C7B0840033F75B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 092FB09123C7B0840033F75B /* GoogleService-Info.plist */; };
+		092FB09523C7E8D10033F75B /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 092FB09423C7E8D10033F75B /* DataService.swift */; };
 		09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4D23B9CCFC007A5126 /* AppDelegate.swift */; };
 		09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */; };
 		09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09311C5123B9CCFC007A5126 /* ViewController.swift */; };
@@ -33,6 +34,7 @@
 		092BDC1B23C411BE0089426B /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		092BDC1D23C426C30089426B /* RoundedCornerTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCornerTextField.swift; sourceTree = "<group>"; };
 		092FB09123C7B0840033F75B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		092FB09423C7E8D10033F75B /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		09311C4A23B9CCFC007A5126 /* ScoopApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScoopApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09311C4D23B9CCFC007A5126 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09311C4F23B9CCFC007A5126 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		092FB09323C7E8A50033F75B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				092FB09423C7E8D10033F75B /* DataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		09311C4123B9CCFC007A5126 = {
 			isa = PBXGroup;
 			children = (
@@ -95,6 +105,7 @@
 		09311C4C23B9CCFC007A5126 /* ScoopApp */ = {
 			isa = PBXGroup;
 			children = (
+				092FB09323C7E8A50033F75B /* Services */,
 				092BDC1823C2BCC80089426B /* Extensions */,
 				0931B71E23BE8CAC00E95F01 /* Protocols */,
 				098FCEE723BBC5850024E38B /* Model */,
@@ -292,6 +303,7 @@
 				098FCEF723BD23E30024E38B /* ContainerVC.swift in Sources */,
 				09311C4E23B9CCFC007A5126 /* AppDelegate.swift in Sources */,
 				098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */,
+				092FB09523C7E8D10033F75B /* DataService.swift in Sources */,
 				092BDC1C23C411BE0089426B /* LoginVC.swift in Sources */,
 				098FCEF123BBFC0D0024E38B /* CircleView.swift in Sources */,
 				09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */,

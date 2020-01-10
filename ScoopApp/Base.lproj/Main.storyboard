@@ -348,8 +348,8 @@
                                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="0yq-qW-eIE">
                                             <rect key="frame" x="20" y="271" width="374" height="32"/>
                                             <segments>
-                                                <segment title="Passenger"/>
-                                                <segment title="Driver"/>
+                                                <segment title="Login"/>
+                                                <segment title="Register"/>
                                             </segments>
                                             <color key="selectedSegmentTintColor" red="0.0078431372550000003" green="0.451640667" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
@@ -368,9 +368,12 @@
                                                 <constraint firstAttribute="height" constant="45" id="tVs-Wk-25h"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
-                                            <state key="normal" title="Sign Up/Login">
+                                            <state key="normal" title="Go">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
+                                            <connections>
+                                                <action selector="authButtonAction:" destination="pHR-2m-uG4" eventType="touchUpInside" id="6Lh-3T-CXl"/>
+                                            </connections>
                                         </button>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="C0i-O4-99f" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
                                             <rect key="frame" x="20" y="310" width="374" height="40"/>
@@ -419,6 +422,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Gxm-vZ-xQv"/>
                     </view>
+                    <connections>
+                        <outlet property="authButtonOutlet" destination="beS-d5-RyE" id="eym-yd-drs"/>
+                        <outlet property="emailTextFieldOutlet" destination="C0i-O4-99f" id="T1H-CO-aVo"/>
+                        <outlet property="passwordTextFieldOutlet" destination="HoH-7o-elW" id="k6r-uK-BDY"/>
+                        <outlet property="segmentedControlOutlet" destination="0yq-qW-eIE" id="90s-zn-rdQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYs-i7-q8z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

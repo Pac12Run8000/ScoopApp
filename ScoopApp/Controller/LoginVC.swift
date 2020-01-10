@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import Firebase
+
 
 class LoginVC: UIViewController {
 
-   
+    @IBOutlet weak var emailTextFieldOutlet: RoundedCornerTextField!
+    @IBOutlet weak var passwordTextFieldOutlet: RoundedCornerTextField!
+    @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
+    @IBOutlet weak var authButtonOutlet: RoundedShadowButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         addTapGesture()
+        
+        emailTextFieldOutlet.delegate = self
+        passwordTextFieldOutlet.delegate = self
+        
     }
     
     @IBAction func cancelButtonAction(_ sender: Any) {
@@ -24,7 +33,10 @@ class LoginVC: UIViewController {
     
    
     
-
+    @IBAction func authButtonAction(_ sender: Any) {
+        
+    }
+    
 }
 
 
@@ -40,4 +52,10 @@ extension LoginVC {
     @objc func handleScreenTap() {
            self.view.endEditing(true)
        }
+}
+
+// MARK:- Textfield delegate functionality
+extension LoginVC: UITextFieldDelegate {
+    
+    
 }
