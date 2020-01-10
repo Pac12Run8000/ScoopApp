@@ -47,8 +47,13 @@ class LoginVC: UIViewController {
         emailTextFieldOutlet.delegate = self
         passwordTextFieldOutlet.delegate = self
         
-        displayImageView()
-        profileImageView.alpha = 0.0
+        setupImageView()
+        
+        
+        
+        
+
+        
         
     }
     
@@ -124,11 +129,71 @@ extension LoginVC {
        }
     }
     
-    func displayImageView() {
+    func setupImageView() {
+        profileImageView.alpha = 0.0
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         profileImageView.layer.borderColor = UIColor.red.cgColor
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 2
+        
+        profileImageView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(actionSheetforProfileImage))
+        profileImageView.addGestureRecognizer(gestureRecognizer)
+        
     }
     
+   
+    
+}
+// MARK:- This is the profileImage functionality
+extension LoginVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    @objc func actionSheetforProfileImage() {
+        
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        
+        let actionSheet = UIAlertController(title: "Get Photos", message: "Camera or Photo Library", preferredStyle: .actionSheet)
+        
+        let libraryAction = UIAlertAction(title: "Photo Library", style: .default) { (action) in
+            imagePickerController.sourceType = .photoLibrary
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        
+        let cameraAction = UIAlertAction(title: "Camera", style: .default) { (action) in
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                imagePickerController.sourceType = .camera
+                self.present(imagePickerController, animated: true, completion: nil)
+            } else {
+                print("There is no camera.")
+            }
+            
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionSheet.addAction(libraryAction)
+        actionSheet.addAction(cameraAction)
+        actionSheet.addAction(cancelAction)
+        present(actionSheet, animated: true, completion: nil)
+
+       }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            self.profileImageView.image = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            self.profileImageView.image = originalImage
+        }
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }
