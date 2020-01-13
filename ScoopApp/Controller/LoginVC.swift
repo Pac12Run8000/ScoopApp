@@ -20,21 +20,30 @@ class LoginVC: UIViewController {
     @IBOutlet weak var emailTextFieldOutlet: RoundedCornerTextField!
     @IBOutlet weak var passwordTextFieldOutlet: RoundedCornerTextField!
     @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
+    
+    @IBOutlet weak var driversPassengersSegmentedControl: UISegmentedControl!
+    
     @IBOutlet weak var authButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageView: UIImageView!
-    
+    @IBOutlet weak var usernameTextField: UITextField!
     
     var loginState:LoginState? {
         didSet {
             if loginState == LoginState.Login {
-                animateConstraint(constant: 8, view: self.view, constraint: emailTopConstraint)
+                animateConstraint(constant: 10, view: self.view, constraint: emailTopConstraint)
                 imageViewAnimate(imgView: profileImageView, alpha: 1.0)
                 animateAuthButton(text: "Login")
+                segmentedControlFadeoutAnimation(control: driversPassengersSegmentedControl, alpha: 1.0)
+                usernameTextField.isHidden = true
+                emailTextFieldOutlet.becomeFirstResponder()
             } else if loginState == LoginState.Register {
-                animateConstraint(constant: 88, view: self.view, constraint: emailTopConstraint)
+                animateConstraint(constant: 175, view: self.view, constraint: emailTopConstraint)
                 imageViewAnimate(imgView: profileImageView, alpha: 0.0)
                 animateAuthButton(text: "Register")
+                segmentedControlFadeoutAnimation(control: driversPassengersSegmentedControl, alpha: 0.0)
+                usernameTextField.isHidden = false
+                usernameTextField.becomeFirstResponder()
             }
         }
     }
@@ -49,16 +58,14 @@ class LoginVC: UIViewController {
         
         setupImageView()
         
-        emailTextFieldOutlet.becomeFirstResponder()
+        
         loginState = .Login
         
         
         
-        
-
-        
-        
     }
+    
+   
     
     @IBAction func cancelButtonAction(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -73,13 +80,16 @@ class LoginVC: UIViewController {
             loginValidation(emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true ? print("Sending data") : print("Invalid data")
         } else if self.loginState == LoginState.Register {
             registrationValidation(imageView: profileImageView, emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true ? print("Sending data") : print("Invalid data")
+            
+//            guard let errorCode = AuthErrorCode(rawValue: <#T##Int#>) else {
+//                return
+//            }
         }
     }
     
     @IBAction func segmentControlAction(_ sender: Any) {
         if let segment = sender as? UISegmentedControl {
             loginState = segment.selectedSegmentIndex == 0 ? LoginState.Login : LoginState.Register
-            
         }
     }
     
@@ -101,13 +111,31 @@ extension LoginVC {
        }
 }
 
-// MARK:- Textfield delegate functionality
+// MARK:- Textfield delegate functionality / Keyboard move functionality
 extension LoginVC: UITextFieldDelegate {
+    
     
     
 }
 // MARK:- Animation functionality
 extension LoginVC {
+    
+    
+    func segmentedControlFadeoutAnimation(control:UISegmentedControl, alpha: CGFloat) {
+        if (alpha == 0.0) {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseOut, animations: {
+                    control.alpha = 1.0
+                }, completion: nil)
+            }
+        } else if (alpha == 1.0) {
+            DispatchQueue.main.async {
+                UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseOut, animations: {
+                    control.alpha = 0.0
+                }, completion: nil)
+            }
+        }
+    }
     
     func animateAuthButton(text:String) {
         self.authButtonOutlet.setTitle(text, for: .normal)
@@ -126,13 +154,13 @@ extension LoginVC {
     private func imageViewAnimate(imgView:UIImageView, alpha:Double) {
         if (alpha == 0.0) {
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 1.0, delay: 0.2, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseOut, animations: {
                     imgView.alpha = 1.0
                 }, completion: nil)
             }
         } else if (alpha == 1.0) {
             DispatchQueue.main.async {
-                UIView.animate(withDuration: 1.0, delay: 0.2, options: .curveEaseOut, animations: {
+                UIView.animate(withDuration: 0.5, delay: 0.2, options: .curveEaseOut, animations: {
                     imgView.alpha = 0.0
                 }, completion: nil)
             }
@@ -235,6 +263,9 @@ extension LoginVC {
         if (imageView.image == nil) {
             presentLoginErrorController(title: "Registration error", msg: "Select an image for you profile.", element: nil)
             return false
+        } else if (usernameTextField.text!.isEmpty) {
+            presentLoginErrorController(title: "login Error", msg: "Please enter a username so that your friends will know who you are.", element: usernameTextField)
+            return false
         } else if (emailField.text!.isEmpty) {
             presentLoginErrorController(title: "login error", msg: "Please enter an email.", element: emailTextFieldOutlet)
             return false
@@ -279,3 +310,4 @@ extension LoginVC {
     
     
 }
+

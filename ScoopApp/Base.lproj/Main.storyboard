@@ -357,7 +357,7 @@
                                             </connections>
                                         </segmentedControl>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="HoH-7o-elW" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="293" width="374" height="40"/>
+                                            <rect key="frame" x="20" y="455" width="374" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="A9D-XH-4QM"/>
                                             </constraints>
@@ -365,7 +365,7 @@
                                             <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="beS-d5-RyE" customClass="RoundedShadowButton" customModule="ScoopApp" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="341" width="374" height="45"/>
+                                            <rect key="frame" x="20" y="503" width="374" height="45"/>
                                             <color key="backgroundColor" red="0.0078431372550000003" green="0.32549019610000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="tVs-Wk-25h"/>
@@ -379,7 +379,7 @@
                                             </connections>
                                         </button>
                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="C0i-O4-99f" customClass="RoundedCornerTextField" customModule="ScoopApp" customModuleProvider="target">
-                                            <rect key="frame" x="20" y="245" width="374" height="40"/>
+                                            <rect key="frame" x="20" y="407" width="374" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="4mL-0z-ma4"/>
                                             </constraints>
@@ -387,36 +387,61 @@
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8V5-TN-zHJ">
-                                            <rect key="frame" x="172" y="245" width="70" height="70"/>
+                                            <rect key="frame" x="172" y="279" width="70" height="70"/>
                                             <color key="backgroundColor" red="0.0078431372550000003" green="0.451640667" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="Mbp-TK-Ac1"/>
                                                 <constraint firstAttribute="width" constant="70" id="bfW-8t-4Nn"/>
                                             </constraints>
                                         </imageView>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xNC-RA-vNn">
+                                            <rect key="frame" x="20" y="242" width="374" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="30" id="tht-2n-VYT"/>
+                                            </constraints>
+                                            <segments>
+                                                <segment title="Drivers"/>
+                                                <segment title="Passengers"/>
+                                            </segments>
+                                            <color key="selectedSegmentTintColor" red="0.0078431372550000003" green="0.451640667" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </segmentedControl>
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nBp-b9-mes">
+                                            <rect key="frame" x="20" y="359" width="374" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="9Qv-Og-P06"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="xNC-RA-vNn" secondAttribute="trailing" constant="20" id="24J-U0-puY"/>
                                         <constraint firstItem="beS-d5-RyE" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="2Cb-W5-zpA"/>
                                         <constraint firstItem="C0i-O4-99f" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="3IZ-uK-rrP"/>
                                         <constraint firstAttribute="trailing" secondItem="beS-d5-RyE" secondAttribute="trailing" constant="20" id="40Q-oC-jcn"/>
                                         <constraint firstAttribute="trailing" secondItem="0yq-qW-eIE" secondAttribute="trailing" constant="20" id="ALs-w0-HXc"/>
+                                        <constraint firstItem="xNC-RA-vNn" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="Est-qN-3lN"/>
                                         <constraint firstItem="f35-bd-No6" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="J7j-qR-CGI"/>
+                                        <constraint firstItem="nBp-b9-mes" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="Nij-rs-yZ6"/>
                                         <constraint firstItem="dKc-zl-kFB" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="Q7P-yM-1lh"/>
                                         <constraint firstItem="J5e-pw-wug" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="TFB-wb-GUd"/>
+                                        <constraint firstItem="xNC-RA-vNn" firstAttribute="top" secondItem="0yq-qW-eIE" secondAttribute="bottom" constant="5" id="UNr-hO-bLD"/>
                                         <constraint firstItem="J5e-pw-wug" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="VZQ-Gs-0GI"/>
                                         <constraint firstItem="f35-bd-No6" firstAttribute="top" secondItem="d9M-DO-3tp" secondAttribute="top" constant="50" id="YOl-f8-dwc"/>
                                         <constraint firstAttribute="trailing" secondItem="C0i-O4-99f" secondAttribute="trailing" constant="20" id="a0I-nb-HCs"/>
+                                        <constraint firstAttribute="trailing" secondItem="nBp-b9-mes" secondAttribute="trailing" constant="20" id="b3c-wH-go1"/>
                                         <constraint firstItem="beS-d5-RyE" firstAttribute="top" secondItem="HoH-7o-elW" secondAttribute="bottom" constant="8" id="fzc-kC-db0"/>
                                         <constraint firstItem="HoH-7o-elW" firstAttribute="top" secondItem="C0i-O4-99f" secondAttribute="bottom" constant="8" id="gjl-3W-TGZ"/>
                                         <constraint firstItem="J5e-pw-wug" firstAttribute="top" secondItem="f35-bd-No6" secondAttribute="bottom" constant="10" id="jZP-z6-co5"/>
                                         <constraint firstItem="HoH-7o-elW" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="kUQ-yW-afW"/>
                                         <constraint firstItem="dKc-zl-kFB" firstAttribute="top" secondItem="d9M-DO-3tp" secondAttribute="top" constant="30" id="me8-AZ-tnX"/>
                                         <constraint firstItem="0yq-qW-eIE" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="n2h-RD-QXY"/>
+                                        <constraint firstItem="C0i-O4-99f" firstAttribute="top" secondItem="nBp-b9-mes" secondAttribute="bottom" constant="8" id="q2d-n2-fP6"/>
                                         <constraint firstItem="0yq-qW-eIE" firstAttribute="top" secondItem="J5e-pw-wug" secondAttribute="bottom" constant="20" id="rKu-iT-uUo"/>
-                                        <constraint firstItem="C0i-O4-99f" firstAttribute="top" secondItem="0yq-qW-eIE" secondAttribute="bottom" constant="8" id="sIv-kK-nME"/>
+                                        <constraint firstItem="C0i-O4-99f" firstAttribute="top" secondItem="0yq-qW-eIE" secondAttribute="bottom" constant="170" id="sIv-kK-nME"/>
                                         <constraint firstItem="8V5-TN-zHJ" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="udX-Qm-raQ"/>
                                         <constraint firstAttribute="trailing" secondItem="HoH-7o-elW" secondAttribute="trailing" constant="20" id="vvi-oC-6EQ"/>
-                                        <constraint firstItem="8V5-TN-zHJ" firstAttribute="top" secondItem="0yq-qW-eIE" secondAttribute="bottom" constant="8" id="x4g-Gw-gXt"/>
+                                        <constraint firstItem="8V5-TN-zHJ" firstAttribute="top" secondItem="0yq-qW-eIE" secondAttribute="bottom" constant="42" id="x4g-Gw-gXt"/>
                                     </constraints>
                                 </view>
                                 <blurEffect style="regular"/>
@@ -437,11 +462,13 @@
                     </view>
                     <connections>
                         <outlet property="authButtonOutlet" destination="beS-d5-RyE" id="eym-yd-drs"/>
+                        <outlet property="driversPassengersSegmentedControl" destination="xNC-RA-vNn" id="6cX-6q-Om5"/>
                         <outlet property="emailTextFieldOutlet" destination="C0i-O4-99f" id="T1H-CO-aVo"/>
                         <outlet property="emailTopConstraint" destination="sIv-kK-nME" id="5Rv-z7-yCN"/>
                         <outlet property="passwordTextFieldOutlet" destination="HoH-7o-elW" id="k6r-uK-BDY"/>
                         <outlet property="profileImageView" destination="8V5-TN-zHJ" id="WE7-Sw-CEd"/>
                         <outlet property="segmentedControlOutlet" destination="0yq-qW-eIE" id="90s-zn-rdQ"/>
+                        <outlet property="usernameTextField" destination="nBp-b9-mes" id="reI-dp-LD0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uYs-i7-q8z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
