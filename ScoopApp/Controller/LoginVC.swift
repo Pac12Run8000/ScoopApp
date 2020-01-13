@@ -61,6 +61,14 @@ class LoginVC: UIViewController {
         
         loginState = .Login
         
+//        logout { (succeed) in
+//            if succeed! {
+//
+//                print("Logged Out!!!")
+//            } else {
+//                print("Logout failed.")
+//            }
+//        }
         
         
     }
@@ -77,25 +85,40 @@ class LoginVC: UIViewController {
 //        authButtonOutlet.animateButton(shouldLoad: true, with: nil)
         
         if self.loginState == LoginState.Login {
-            loginValidation(emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true ? print("Sending data") : print("Invalid data")
-        } else if self.loginState == LoginState.Register {
-
             
+            // MARK:- Login functionality
+            guard loginValidation(emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
+                return
+            }
+            
+            Auth.auth().signIn(withEmail: emailTextFieldOutlet.text!, password: passwordTextFieldOutlet.text!) { [unowned self] (result, error) in
+                guard error == nil else {
+                    if let description = error?.localizedDescription {
+                        self.presentLoginErrorController(title: "Login error", msg: "Error:\(description)", element: nil)
+                    }
+                    return
+                }
+                
+                print("Logged In!!!!")
+            }
+            
+            
+        } else if self.loginState == LoginState.Register {
+            
+            // MARK:- Registration functionality
             guard registrationValidation(imageView: profileImageView, emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
-                presentLoginErrorController(title: "Registration Error", msg: "System did not create a user.", element: nil)
                 return
             }
             
             Auth.auth().createUser(withEmail: emailTextFieldOutlet.text!, password: passwordTextFieldOutlet.text!) { [unowned self] (result, error) in
                 guard error == nil else {
-                    
-                    self.presentLoginErrorController(title: "registration error", msg: "There was an error creating the user.", element: nil)
+                    if let description = error?.localizedDescription {
+                        self.presentLoginErrorController(title: "registration error", msg: "There was an error creating the user:\(description)", element: nil)
+                    }
                     return
                 }
                 print("User creation was successful!!!")
             }
-          
-            
 //            guard let errorCode = AuthErrorCode(rawValue: <#T##Int#>) else {
 //                return
 //            }
@@ -332,6 +355,19 @@ extension LoginVC {
     }
     
     
+}
+
+extension LoginVC {
+    
+    private func logout(completion:@escaping(_ success:Bool?) -> ()) {
+        do {
+            try Auth.auth().signOut()
+            completion(true)
+        } catch {
+            print("error:\(error.localizedDescription)")
+            completion(false)
+        }
+    }
 }
 
 
