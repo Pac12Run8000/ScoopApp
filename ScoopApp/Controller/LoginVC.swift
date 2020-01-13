@@ -79,7 +79,22 @@ class LoginVC: UIViewController {
         if self.loginState == LoginState.Login {
             loginValidation(emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true ? print("Sending data") : print("Invalid data")
         } else if self.loginState == LoginState.Register {
-            registrationValidation(imageView: profileImageView, emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true ? print("Sending data") : print("Invalid data")
+
+            
+            guard registrationValidation(imageView: profileImageView, emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
+                presentLoginErrorController(title: "Registration Error", msg: "System did not create a user.", element: nil)
+                return
+            }
+            
+            Auth.auth().createUser(withEmail: emailTextFieldOutlet.text!, password: passwordTextFieldOutlet.text!) { [unowned self] (result, error) in
+                guard error == nil else {
+                    
+                    self.presentLoginErrorController(title: "registration error", msg: "There was an error creating the user.", element: nil)
+                    return
+                }
+                print("User creation was successful!!!")
+            }
+          
             
 //            guard let errorCode = AuthErrorCode(rawValue: <#T##Int#>) else {
 //                return
@@ -318,4 +333,6 @@ extension LoginVC {
     
     
 }
+
+
 
