@@ -263,7 +263,7 @@ extension LoginVC {
         if (imageView.image == nil) {
             presentLoginErrorController(title: "Registration error", msg: "Select an image for you profile.", element: nil)
             return false
-        } else if (usernameTextField.text!.isEmpty) {
+        } else if let username = usernameTextField.text, let t_username = username.trimmingCharacters(in: .whitespacesAndNewlines) as? String, t_username.isEmpty {
             presentLoginErrorController(title: "login Error", msg: "Please enter a username so that your friends will know who you are.", element: usernameTextField)
             return false
         } else if (emailField.text!.isEmpty) {
@@ -272,11 +272,14 @@ extension LoginVC {
         } else if (!isValidEmailAddress(testStr: emailTextFieldOutlet.text!)) {
             presentLoginErrorController(title: "login error", msg: "Your email was invalid. Try again.", element: emailTextFieldOutlet)
             return false
-        } else if (passwordField.text!.isEmpty) {
+        } else if let password = passwordField.text?.trimmingCharacters(in: .whitespacesAndNewlines), password.isEmpty {
             presentLoginErrorController(title: "login error", msg: "Please enter a password.", element: passwordTextFieldOutlet)
             return false
-        } else if (passwordTextFieldOutlet.text!.count <= 6) {
+        } else if let password = passwordTextFieldOutlet.text, password.count <= 6 {
             presentLoginErrorController(title: "login error", msg: "Please enter a valid password. The password has to be at least 6 characters long.", element: passwordTextFieldOutlet)
+            return false
+        } else if let password = passwordField.text, password.contains(" ") {
+             presentLoginErrorController(title: "login error", msg: "Please enter a valid password. Remove all whitespaces.", element: passwordTextFieldOutlet)
             return false
         }
         
@@ -293,12 +296,17 @@ extension LoginVC {
         } else if (passwordField.text!.isEmpty) {
             presentLoginErrorController(title: "login error", msg: "Please enter a password.", element: passwordTextFieldOutlet)
             return false
-        } else if (passwordTextFieldOutlet.text!.count <= 6) {
+        } else if let password = passwordTextFieldOutlet.text, password.count <= 6 {
             presentLoginErrorController(title: "login error", msg: "Please enter a valid password. The password has to be at least 6 characters long.", element: passwordTextFieldOutlet)
+            return false
+        } else if let password = passwordField.text, password.contains(" ") {
+             presentLoginErrorController(title: "login error", msg: "Please enter a valid password. Remove all whitespaces.", element: passwordTextFieldOutlet)
             return false
         }
         return true
     }
+    
+    
     
     
     func isValidEmailAddress(testStr:String) -> Bool {

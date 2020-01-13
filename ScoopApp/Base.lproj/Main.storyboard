@@ -405,7 +405,7 @@
                                             </segments>
                                             <color key="selectedSegmentTintColor" red="0.0078431372550000003" green="0.451640667" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                         </segmentedControl>
-                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nBp-b9-mes">
+                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nBp-b9-mes">
                                             <rect key="frame" x="20" y="359" width="374" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="9Qv-Og-P06"/>
