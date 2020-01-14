@@ -420,9 +420,9 @@ extension LoginVC {
                 
                 let userID = Auth.auth().currentUser?.uid as! String
                 let ref = Database.database().reference()
-                let userRef = ref.child("users").child(userID)
+                let userRef = ref.child(userType.rawValue).child(userID)
                 
-                let values = ["username": username, "email": email, "userType": userType.rawValue, "profileImageUrl": url?.absoluteString]
+                let values = ["username": username, "email": email, "profileImageUrl": url?.absoluteString]
                 
                 userRef.updateChildValues(values) { (err, reference) in
                     guard err == nil else {
