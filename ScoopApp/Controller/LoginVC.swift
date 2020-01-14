@@ -14,6 +14,11 @@ enum LoginState {
     case Register
 }
 
+enum UserType:String {
+    case Driver = "Driver"
+    case Passenger = "Passenger"
+}
+
 
 class LoginVC: UIViewController {
 
@@ -48,6 +53,16 @@ class LoginVC: UIViewController {
         }
     }
     
+    var userType:UserType? {
+        didSet {
+            if userType == UserType.Driver {
+                
+            } else if userType == UserType.Passenger {
+                
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +75,7 @@ class LoginVC: UIViewController {
         
         
         loginState = .Login
+        userType = .Driver
         
 //        logout { (succeed) in
 //            if succeed! {
@@ -118,6 +134,7 @@ class LoginVC: UIViewController {
                     return
                 }
                 print("User creation was successful!!!")
+                self.storeProfileDataAndImage(email: self.emailTextFieldOutlet.text!, userType: UserType(rawValue: (self.userType?.rawValue)!)!, profileImage: self.profileImageView.image!, username: self.usernameTextField.text!)
             }
 //            guard let errorCode = AuthErrorCode(rawValue: <#T##Int#>) else {
 //                return
@@ -131,6 +148,11 @@ class LoginVC: UIViewController {
         }
     }
     
+    @IBAction func userTypeSegmentedControl(_ sender: Any) {
+        if let segment = sender as? UISegmentedControl {
+            userType = segment.selectedSegmentIndex == 0 ? UserType.Driver : UserType.Passenger
+        }
+    }
     
 }
 
@@ -357,6 +379,7 @@ extension LoginVC {
     
 }
 
+// MARK:- Logout functionality
 extension LoginVC {
     
     private func logout(completion:@escaping(_ success:Bool?) -> ()) {
@@ -367,6 +390,56 @@ extension LoginVC {
             print("error:\(error.localizedDescription)")
             completion(false)
         }
+    }
+}
+
+
+// MARK:- Store the Login information to Firebase
+extension LoginVC {
+    
+    private func storeProfileDataAndImage(email:String, userType:UserType, profileImage:UIImage, username:String) {
+        
+        let storageRef = Storage.storage().reference().child("profileImages").child("\(NSUUID().uuidString).jpg")
+        storageRef.putData(profileImage.jpegData(compressionQuality: 0.1)!, metadata: nil) { (metaData, error) in
+            
+            guard error == nil else {
+                print("storage error:\(error?.localizedDescription)")
+                return
+            }
+            
+            storageRef.downloadURL { (url, error) in
+                guard error == nil else {
+                    print("download error:\(error?.localizedDescription)")
+                    return
+                }
+                
+                guard (url?.absoluteString) != nil else {
+                    print("There was an error with absolute string.")
+                    return
+                }
+                
+                let userID = Auth.auth().currentUser?.uid as! String
+                let ref = Database.database().reference()
+                let userRef = ref.child("users").child(userID)
+                
+                let values = ["username": username, "email": email, "userType": userType.rawValue, "profileImageUrl": url?.absoluteString]
+                
+                userRef.updateChildValues(values) { (err, reference) in
+                    guard err == nil else {
+                        if let errdescription = err?.localizedDescription {
+                            print("error:\(errdescription)")
+                        }
+                        return
+                    }
+                    
+                    print("Data saved to firebase")
+                }
+                
+            }
+        }
+        
+    
+       
     }
 }
 
