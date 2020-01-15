@@ -123,23 +123,11 @@ class LoginVC: UIViewController {
                     }
                     return
                 }
-
-                ScoopUpUser.observePassengersAndDriver(uId: (result?.user.uid)!) { (user, succeed) in
-//                    print("user:\(user?.uId)", user?.email, user?.isPickUpModeEnabled, user?.userType)
-                    
-                    guard succeed == true else {
-                        print("Unable to successfully retrieve data.")
-                        return
-                    }
-                    
-                    guard let user = user else {
-                        print("There is no user!")
-                        return
-                    }
-                    
-                    self.loginDelegate?.setUserProfile(scoopUser: user)
+                
+                if let userId = result?.user.uid as? String {
+                    self.acceptUserIdAndSendScoopUser(uId: userId)
                 }
-                self.dismiss(animated: true, completion: nil)
+
             }
             
         } else if self.loginState == LoginState.Register {
@@ -157,7 +145,7 @@ class LoginVC: UIViewController {
                     return
                 }
                 print("User creation was successful!!!")
-                self.storeProfileDataAndImage(email: self.emailTextFieldOutlet.text!, userType: UserType(rawValue: (self.userType?.rawValue)!)!, profileImage: self.profileImageView.image!, username: self.usernameTextField.text!)
+                self.storeProfileDataAndImageSendToLeftSideVC(email: self.emailTextFieldOutlet.text!, userType: UserType(rawValue: (self.userType?.rawValue)!)!, profileImage: self.profileImageView.image!, username: self.usernameTextField.text!)
             }
             
             
@@ -178,6 +166,30 @@ class LoginVC: UIViewController {
     
 }
 
+// MARK:- Accept the userID and send a ScoopUser to LeftSidePanel through delegate/protocol pattern
+extension LoginVC {
+    
+    private func acceptUserIdAndSendScoopUser(uId:String) {
+        
+        ScoopUpUser.observePassengersAndDriver(uId: uId) { (user, succeed) in
+                           
+            guard succeed == true else {
+                print("Unable to successfully retrieve data.")
+                return
+            }
+            
+            guard let user = user else {
+                print("There is no user!")
+                return
+            }
+            
+            self.loginDelegate?.setUserProfile(scoopUser: user)
+        }
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
 
 // MARK:- Remove keyboard from view
 extension LoginVC {
@@ -190,7 +202,7 @@ extension LoginVC {
     
     @objc func handleScreenTap() {
            self.view.endEditing(true)
-       }
+    }
 }
 
 // MARK:- Textfield delegate functionality / Keyboard move functionality
@@ -419,7 +431,7 @@ extension LoginVC {
 // MARK:- Store the Login information to Firebase
 extension LoginVC {
     
-    private func storeProfileDataAndImage(email:String, userType:UserType, profileImage:UIImage, username:String) {
+    private func storeProfileDataAndImageSendToLeftSideVC(email:String, userType:UserType, profileImage:UIImage, username:String) {
         
         let storageRef = Storage.storage().reference().child("profileImages").child("\(NSUUID().uuidString).jpg")
         storageRef.putData(profileImage.jpegData(compressionQuality: 0.1)!, metadata: nil) { (metaData, error) in
@@ -455,17 +467,8 @@ extension LoginVC {
                     }
                     
                     print("Data saved to firebase")
-                    
-                    if let userId = Auth.auth().currentUser?.uid {
-                        ScoopUpUser.observePassengersAndDriver(uId: userId) { (scoopUser, succeed) in
-                            if (succeed) {
-                                self.loginDelegate?.setUserProfile(scoopUser: scoopUser!)
-                                self.dismiss(animated: true , completion: nil)
-                            }
-                        }
-                    } else {
-                        print("Noone is logged in.")
-                        self.presentLoginErrorController(title: "Registration error", msg: "You are not logged in.", element: nil)
+                    if let userId = Auth.auth().currentUser?.uid as? String {
+                        self.acceptUserIdAndSendScoopUser(uId: userId)
                     }
                 }
                 
