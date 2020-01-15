@@ -20,18 +20,27 @@ enum UserType:String {
 }
 
 
+protocol LoginDelegate:class {
+    func setUserProfile(scoopUser:ScoopUpUser)
+}
+
+
 class LoginVC: UIViewController {
 
     @IBOutlet weak var emailTextFieldOutlet: RoundedCornerTextField!
     @IBOutlet weak var passwordTextFieldOutlet: RoundedCornerTextField!
     @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
-    
     @IBOutlet weak var driversPassengersSegmentedControl: UISegmentedControl!
-    
     @IBOutlet weak var authButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
+    
+    
+    weak var loginDelegate:LoginDelegate?
+    
+    
+    
     
     var loginState:LoginState? {
         didSet {
@@ -77,14 +86,14 @@ class LoginVC: UIViewController {
         loginState = .Login
         userType = .Driver
         
-//        logout { (succeed) in
-//            if succeed! {
-//
-//                print("Logged Out!!!")
-//            } else {
-//                print("Logout failed.")
-//            }
-//        }
+        logout { (succeed) in
+            if succeed! {
+
+                print("Logged Out!!!")
+            } else {
+                print("Logout failed.")
+            }
+        }
         
         
     }
@@ -114,10 +123,24 @@ class LoginVC: UIViewController {
                     }
                     return
                 }
-                
-                print("Logged In!!!!")
+
+                ScoopUpUser.observePassengersAndDriver(uId: (result?.user.uid)!) { (user, succeed) in
+//                    print("user:\(user?.uId)", user?.email, user?.isPickUpModeEnabled, user?.userType)
+                    
+                    guard succeed == true else {
+                        print("Unable to successfully retrieve data.")
+                        return
+                    }
+                    
+                    guard let user = user else {
+                        print("There is no user!")
+                        return
+                    }
+                    
+                    self.loginDelegate?.setUserProfile(scoopUser: user)
+                }
+                self.dismiss(animated: true, completion: nil)
             }
-            
             
         } else if self.loginState == LoginState.Register {
             
@@ -136,9 +159,8 @@ class LoginVC: UIViewController {
                 print("User creation was successful!!!")
                 self.storeProfileDataAndImage(email: self.emailTextFieldOutlet.text!, userType: UserType(rawValue: (self.userType?.rawValue)!)!, profileImage: self.profileImageView.image!, username: self.usernameTextField.text!)
             }
-//            guard let errorCode = AuthErrorCode(rawValue: <#T##Int#>) else {
-//                return
-//            }
+            
+            
         }
     }
     
@@ -422,9 +444,9 @@ extension LoginVC {
                 let ref = Database.database().reference()
                 let userRef = ref.child(userType.rawValue).child(userID)
                 
-                let values = ["username": username, "email": email, "profileImageUrl": url?.absoluteString]
+                let values = ["username": username, "email": email, "profileImageUrl": url?.absoluteString, "isPickUpModeEnabled": false] as [String : AnyObject]
                 
-                userRef.updateChildValues(values) { (err, reference) in
+                userRef.updateChildValues(values) { [unowned self] (err, reference) in
                     guard err == nil else {
                         if let errdescription = err?.localizedDescription {
                             print("error:\(errdescription)")
@@ -433,6 +455,18 @@ extension LoginVC {
                     }
                     
                     print("Data saved to firebase")
+                    
+                    if let userId = Auth.auth().currentUser?.uid {
+                        ScoopUpUser.observePassengersAndDriver(uId: userId) { (scoopUser, succeed) in
+                            if (succeed) {
+                                self.loginDelegate?.setUserProfile(scoopUser: scoopUser!)
+                                self.dismiss(animated: true , completion: nil)
+                            }
+                        }
+                    } else {
+                        print("Noone is logged in.")
+                        self.presentLoginErrorController(title: "Registration error", msg: "You are not logged in.", element: nil)
+                    }
                 }
                 
             }
@@ -441,6 +475,16 @@ extension LoginVC {
     
        
     }
+}
+// MARK:- Error code notes
+extension LoginVC {
+    
+    /*
+    guard let errorCode = AuthErrorCode(rawValue: 0) else {
+        return
+    }
+    */
+    
 }
 
 

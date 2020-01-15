@@ -305,6 +305,9 @@
                                 <color key="textColor" red="0.0078431372550000003" green="0.32549019610000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CD6-dZ-QqH">
+                                <rect key="frame" x="20" y="592" width="51" height="31"/>
+                            </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -313,10 +316,12 @@
                             <constraint firstItem="hSX-5x-iPY" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" constant="20" id="FTh-Br-sMf"/>
                             <constraint firstItem="pSZ-EC-Fdx" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" constant="20" id="FcG-x5-YB5"/>
                             <constraint firstItem="ryF-c2-ltE" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" constant="20" id="FzV-Dp-BST"/>
+                            <constraint firstItem="pSZ-EC-Fdx" firstAttribute="top" secondItem="CD6-dZ-QqH" secondAttribute="bottom" constant="8" id="Lyh-nJ-LH2"/>
                             <constraint firstItem="qJ0-7v-KK6" firstAttribute="top" secondItem="LA8-Lq-rtv" secondAttribute="bottom" constant="8" id="Nsg-Kl-pgt"/>
                             <constraint firstItem="LA8-Lq-rtv" firstAttribute="top" secondItem="GPA-C7-acW" secondAttribute="bottom" constant="8" id="OwB-hg-qtw"/>
                             <constraint firstItem="GPA-C7-acW" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" constant="20" id="VJC-66-SNo"/>
                             <constraint firstItem="LA8-Lq-rtv" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" constant="20" id="W5J-uB-1k6"/>
+                            <constraint firstItem="CD6-dZ-QqH" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" constant="20" id="Y32-pt-HIE"/>
                             <constraint firstItem="CFE-LC-dgi" firstAttribute="leading" secondItem="f1z-I1-xZx" secondAttribute="leading" id="hKV-gt-BSp"/>
                             <constraint firstItem="ryF-c2-ltE" firstAttribute="bottom" secondItem="f1z-I1-xZx" secondAttribute="bottom" id="kOI-pH-Azf"/>
                             <constraint firstItem="CFE-LC-dgi" firstAttribute="trailing" secondItem="f1z-I1-xZx" secondAttribute="trailing" id="qf9-ui-MrR"/>
@@ -327,6 +332,12 @@
                         <viewLayoutGuide key="safeArea" id="f1z-I1-xZx"/>
                     </view>
                     <connections>
+                        <outlet property="accountTypeLabelOutlet" destination="qJ0-7v-KK6" id="UY8-Z5-XwO"/>
+                        <outlet property="emailLabelOutlet" destination="LA8-Lq-rtv" id="kIY-m2-Hii"/>
+                        <outlet property="loginLogoutButtonOutlet" destination="ryF-c2-ltE" id="kpS-Ng-gth"/>
+                        <outlet property="pickUpSwitchOutlet" destination="CD6-dZ-QqH" id="rMg-wh-TXl"/>
+                        <outlet property="pickupModeLabelOutlet" destination="pSZ-EC-Fdx" id="jZ2-LZ-CZ7"/>
+                        <outlet property="profileImageViewOutlet" destination="GPA-C7-acW" id="4vf-WZ-RTC"/>
                         <segue destination="pHR-2m-uG4" kind="presentation" identifier="loginVCSegue" modalPresentationStyle="overFullScreen" id="6IV-6c-zkZ"/>
                     </connections>
                 </viewController>
