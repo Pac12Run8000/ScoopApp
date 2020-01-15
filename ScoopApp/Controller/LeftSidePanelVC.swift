@@ -31,9 +31,15 @@ class LeftSidePanelVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        pickUpSwitchOutlet.isOn = false
-        pickUpSwitchOutlet.isHidden = true
-        pickupModeLabelOutlet.isHidden = true
+        if Auth.auth().currentUser == nil {
+            loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
+        } else {
+            loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
+        }
+        
+//        pickUpSwitchOutlet.isOn = false
+//        pickUpSwitchOutlet.isHidden = true
+//        pickupModeLabelOutlet.isHidden = true
         
 //        observePassengersAndDriver()
         
@@ -84,8 +90,23 @@ class LeftSidePanelVC: UIViewController {
     
     @IBAction func signUpLoginBtnActionPressed(_ sender: Any) {
         
-//        if Auth.auth().currentUser == nil {
+        if Auth.auth().currentUser == nil {
             performSegue(withIdentifier: "loginVCSegue", sender: self)
+        } else {
+            logout { (succeed) in
+                if succeed! {
+                    print("Logged Out.")
+                    self.emailLabelOutlet.text = ""
+                    self.accountTypeLabelOutlet.text = ""
+                    self.profileImageViewOutlet.isHidden = true
+                    self.pickupModeLabelOutlet.isHidden = true
+                    self.pickUpSwitchOutlet.isHidden = true
+                }
+            }
+        }
+        
+//        if Auth.auth().currentUser == nil {
+//            performSegue(withIdentifier: "loginVCSegue", sender: self)
 //        } else {
 //            logout { (success) in
 //                if success! {
@@ -108,10 +129,6 @@ class LeftSidePanelVC: UIViewController {
             controller?.loginDelegate = self
             
         }
-//        if (segue.identifier == "portfolioSegue") {
-//                   let controller = segue.destination as? PortfolioViewController
-//                   controller!.barber = self.barber
-//               }
     }
     
     
@@ -135,12 +152,19 @@ extension LeftSidePanelVC:LoginDelegate {
             print("There was a problem downloading the image.")
             return
         }
+        
         ImageService.downloadAndCacheImage(withUrl: imgUrl) { (isdownloaded, image, error) in
             if isdownloaded {
                 DispatchQueue.main.async {
                     self.profileImageViewOutlet.image = image
                 }
             }
+        }
+        
+        if Auth.auth().currentUser == nil {
+            self.loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
+        } else {
+            self.loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
         }
         
         
