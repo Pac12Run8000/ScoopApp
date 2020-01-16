@@ -35,7 +35,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var emailTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var usernameTextField: UITextField!
-    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     weak var loginDelegate:LoginDelegate?
     
@@ -108,11 +108,13 @@ class LoginVC: UIViewController {
     
     @IBAction func authButtonAction(_ sender: Any) {
 //        authButtonOutlet.animateButton(shouldLoad: true, with: nil)
+        self.activityIndicator.startAnimating()
         
         if self.loginState == LoginState.Login {
             
             // MARK:- Login functionality
             guard loginValidation(emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
+                self.activityIndicator.stopAnimating()
                 return
             }
             
@@ -121,11 +123,14 @@ class LoginVC: UIViewController {
                     if let description = error?.localizedDescription {
                         self.presentLoginErrorController(title: "Login error", msg: "Error:\(description)", element: nil)
                     }
+                    self.activityIndicator.stopAnimating()
                     return
                 }
                 
                 if let userId = result?.user.uid as? String {
                     self.acceptUserIdAndSendScoopUser(uId: userId)
+                } else {
+                    self.activityIndicator.stopAnimating()
                 }
 
             }
@@ -134,6 +139,7 @@ class LoginVC: UIViewController {
             
             // MARK:- Registration functionality
             guard registrationValidation(imageView: profileImageView, emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
+                self.activityIndicator.stopAnimating()
                 return
             }
             
@@ -142,6 +148,7 @@ class LoginVC: UIViewController {
                     if let description = error?.localizedDescription {
                         self.presentLoginErrorController(title: "registration error", msg: "There was an error creating the user:\(description)", element: nil)
                     }
+                    self.activityIndicator.stopAnimating()
                     return
                 }
                 print("User creation was successful!!!")
@@ -182,7 +189,7 @@ extension LoginVC {
                 print("There is no user!")
                 return
             }
-            
+            self.activityIndicator.stopAnimating()
             self.loginDelegate?.setUserProfile(scoopUser: user)
         }
         self.dismiss(animated: true, completion: nil)
@@ -438,17 +445,20 @@ extension LoginVC {
             
             guard error == nil else {
                 print("storage error:\(error?.localizedDescription)")
+                self.activityIndicator.stopAnimating()
                 return
             }
             
             storageRef.downloadURL { (url, error) in
                 guard error == nil else {
                     print("download error:\(error?.localizedDescription)")
+                    self.activityIndicator.stopAnimating()
                     return
                 }
                 
                 guard (url?.absoluteString) != nil else {
                     print("There was an error with absolute string.")
+                    self.activityIndicator.stopAnimating()
                     return
                 }
                 
@@ -463,6 +473,7 @@ extension LoginVC {
                         if let errdescription = err?.localizedDescription {
                             print("error:\(errdescription)")
                         }
+                        self.activityIndicator.stopAnimating()
                         return
                     }
                     

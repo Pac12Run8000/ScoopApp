@@ -25,6 +25,7 @@ class LeftSidePanelVC: UIViewController {
         
         if let uid = Auth.auth().currentUser?.uid {
             ScoopUpUser.observePassengersAndDriver(uId: uid) { (user, succeed) in
+                self.loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
                 self.emailLabelOutlet.text = user?.email
                 self.accountTypeLabelOutlet.text = user?.userType
                 if let urlString = user?.profileImageUrl, let url = URL(string: urlString) {
@@ -43,6 +44,7 @@ class LeftSidePanelVC: UIViewController {
                 }
             }
         } else {
+            self.loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
             
             self.emailLabelOutlet.isHidden = true
             self.accountTypeLabelOutlet.isHidden = true
@@ -60,62 +62,10 @@ class LeftSidePanelVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if Auth.auth().currentUser == nil {
-            loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
-        } else {
-            loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
-        }
-        
-//        pickUpSwitchOutlet.isOn = false
-//        pickUpSwitchOutlet.isHidden = true
-//        pickupModeLabelOutlet.isHidden = true
-        
-//        observePassengersAndDriver()
-        
-//        if Auth.auth().currentUser == nil {
-//            emailLabelOutlet.text = ""
-//            accountTypeLabelOutlet.text = ""
-//            profileImageViewOutlet.isHidden = true
-//            pickupModeLabelOutlet.isHidden = true
-//            pickUpSwitchOutlet.isHidden = true
-//            loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
-//        } else {
-//            emailLabelOutlet.text = Auth.auth().currentUser?.email
-//            accountTypeLabelOutlet.text = ""
-//            profileImageViewOutlet.isHidden = false
-//            loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
-//        }
+       
     }
     
-//    func observePassengersAndDriver() {
-//
-//        Database.database().reference().child("Passenger").observeSingleEvent(of: .value, with: { (snapshot) in
-//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-//                for snap in snapshot {
-//                    if snap.key == Auth.auth().currentUser?.uid {
-//                        self.accountTypeLabelOutlet.text = "Passenger"
-//                    }
-//                }
-//            }
-//        }, withCancel: nil)
-//
-//        Database.database().reference().child("Driver").observeSingleEvent(of: .value, with: { (snapshot) in
-//            if let snapshot = snapshot.children.allObjects as? [DataSnapshot] {
-//                for snap in snapshot {
-//                    if snap.key == Auth.auth().currentUser?.uid {
-//                        self.accountTypeLabelOutlet.text = "Driver"
-//                        self.pickUpSwitchOutlet.isHidden = false
-//                        let switchStatus = snap.childSnapshot(forPath: "isPickUpModeEnabled").value as! Bool
-//                        self.pickUpSwitchOutlet.isOn = switchStatus
-//                        self.pickupModeLabelOutlet.isHidden = false
-//                    }
-//                }
-//            }
-//        }, withCancel: nil)
-        
-        
-        
-//    }
+
     
     @IBAction func signUpLoginBtnActionPressed(_ sender: Any) {
         
@@ -160,14 +110,20 @@ extension LeftSidePanelVC:LoginDelegate {
         
         emailLabelOutlet.text = scoopUser.email
         accountTypeLabelOutlet.text = scoopUser.userType
-        pickupModeLabelOutlet.text = "Pickup Mode Enabled"
-        pickUpSwitchOutlet.isOn = scoopUser.isPickUpModeEnabled
-        pickUpSwitchOutlet.isHidden = false
-        pickupModeLabelOutlet.isHidden = false
         profileImageViewOutlet.isHidden = false
         emailLabelOutlet.isHidden = false
         accountTypeLabelOutlet.isHidden = false
         
+        if scoopUser.userType == "Passenger" {
+            self.pickUpSwitchOutlet.isHidden = true
+            self.pickupModeLabelOutlet.isHidden = true
+        } else if scoopUser.userType == "Driver" {
+            self.pickUpSwitchOutlet.isHidden = false
+            self.pickupModeLabelOutlet.isHidden = false
+            self.pickUpSwitchOutlet.isOn = scoopUser.isPickUpModeEnabled
+        }
+        
+
         
         guard let imgUrlString = scoopUser.profileImageUrl as? String, let imgUrl = URL(string: imgUrlString)  else {
             print("There was a problem downloading the image.")

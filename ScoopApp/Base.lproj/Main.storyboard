@@ -475,6 +475,12 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                         </textField>
+                                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="AyN-Xy-jyn">
+                                            <rect key="frame" x="188.5" y="390.5" width="37" height="37"/>
+                                            <color key="backgroundColor" red="0.42745098040000001" green="0.56078431370000004" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </activityIndicatorView>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="xNC-RA-vNn" secondAttribute="trailing" constant="20" id="24J-U0-puY"/>
@@ -482,8 +488,10 @@
                                         <constraint firstItem="C0i-O4-99f" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="3IZ-uK-rrP"/>
                                         <constraint firstAttribute="trailing" secondItem="beS-d5-RyE" secondAttribute="trailing" constant="20" id="40Q-oC-jcn"/>
                                         <constraint firstAttribute="trailing" secondItem="0yq-qW-eIE" secondAttribute="trailing" constant="20" id="ALs-w0-HXc"/>
+                                        <constraint firstItem="AyN-Xy-jyn" firstAttribute="centerY" secondItem="d9M-DO-3tp" secondAttribute="centerY" id="CWf-WM-96S"/>
                                         <constraint firstItem="xNC-RA-vNn" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="Est-qN-3lN"/>
                                         <constraint firstItem="f35-bd-No6" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="J7j-qR-CGI"/>
+                                        <constraint firstItem="AyN-Xy-jyn" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="Jef-sT-utY"/>
                                         <constraint firstItem="nBp-b9-mes" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="Nij-rs-yZ6"/>
                                         <constraint firstItem="dKc-zl-kFB" firstAttribute="leading" secondItem="d9M-DO-3tp" secondAttribute="leading" constant="20" id="Q7P-yM-1lh"/>
                                         <constraint firstItem="J5e-pw-wug" firstAttribute="centerX" secondItem="d9M-DO-3tp" secondAttribute="centerX" id="TFB-wb-GUd"/>
@@ -523,6 +531,7 @@
                         <viewLayoutGuide key="safeArea" id="Gxm-vZ-xQv"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="AyN-Xy-jyn" id="11I-Hp-LNa"/>
                         <outlet property="authButtonOutlet" destination="beS-d5-RyE" id="eym-yd-drs"/>
                         <outlet property="driversPassengersSegmentedControl" destination="xNC-RA-vNn" id="6cX-6q-Om5"/>
                         <outlet property="emailTextFieldOutlet" destination="C0i-O4-99f" id="T1H-CO-aVo"/>
