@@ -109,12 +109,14 @@ class LoginVC: UIViewController {
     @IBAction func authButtonAction(_ sender: Any) {
 //        authButtonOutlet.animateButton(shouldLoad: true, with: nil)
         self.activityIndicator.startAnimating()
+        self.authButtonOutlet.isEnabled = false
         
         if self.loginState == LoginState.Login {
             
             // MARK:- Login functionality
             guard loginValidation(emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
                 self.activityIndicator.stopAnimating()
+                self.authButtonOutlet.isEnabled = true
                 return
             }
             
@@ -124,6 +126,7 @@ class LoginVC: UIViewController {
                         self.presentLoginErrorController(title: "Login error", msg: "Error:\(description)", element: nil)
                     }
                     self.activityIndicator.stopAnimating()
+                    self.authButtonOutlet.isEnabled = true
                     return
                 }
                 
@@ -131,6 +134,7 @@ class LoginVC: UIViewController {
                     self.acceptUserIdAndSendScoopUser(uId: userId)
                 } else {
                     self.activityIndicator.stopAnimating()
+                    self.authButtonOutlet.isEnabled = true
                 }
 
             }
@@ -140,6 +144,7 @@ class LoginVC: UIViewController {
             // MARK:- Registration functionality
             guard registrationValidation(imageView: profileImageView, emailField: emailTextFieldOutlet, passwordField: passwordTextFieldOutlet) == true else {
                 self.activityIndicator.stopAnimating()
+                self.authButtonOutlet.isEnabled = true
                 return
             }
             
@@ -149,6 +154,7 @@ class LoginVC: UIViewController {
                         self.presentLoginErrorController(title: "registration error", msg: "There was an error creating the user:\(description)", element: nil)
                     }
                     self.activityIndicator.stopAnimating()
+                    self.authButtonOutlet.isEnabled = true
                     return
                 }
                 print("User creation was successful!!!")
@@ -446,6 +452,7 @@ extension LoginVC {
             guard error == nil else {
                 print("storage error:\(error?.localizedDescription)")
                 self.activityIndicator.stopAnimating()
+                self.authButtonOutlet.isEnabled = true
                 return
             }
             
@@ -453,12 +460,14 @@ extension LoginVC {
                 guard error == nil else {
                     print("download error:\(error?.localizedDescription)")
                     self.activityIndicator.stopAnimating()
+                    self.authButtonOutlet.isEnabled = true
                     return
                 }
                 
                 guard (url?.absoluteString) != nil else {
                     print("There was an error with absolute string.")
                     self.activityIndicator.stopAnimating()
+                    self.authButtonOutlet.isEnabled = true
                     return
                 }
                 
@@ -474,6 +483,7 @@ extension LoginVC {
                             print("error:\(errdescription)")
                         }
                         self.activityIndicator.stopAnimating()
+                        self.authButtonOutlet.isEnabled = true
                         return
                     }
                     
