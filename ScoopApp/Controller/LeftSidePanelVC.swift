@@ -22,6 +22,35 @@ class LeftSidePanelVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let uid = Auth.auth().currentUser?.uid {
+            ScoopUpUser.observePassengersAndDriver(uId: uid) { (user, succeed) in
+                self.emailLabelOutlet.text = user?.email
+                self.accountTypeLabelOutlet.text = user?.userType
+                if let urlString = user?.profileImageUrl, let url = URL(string: urlString) {
+                    ImageService.downloadAndCacheImage(withUrl: url) { (succeed, image, err) in
+                        self.profileImageViewOutlet.image = image
+                    }
+                }
+                
+                if user?.userType == "Passenger" {
+                    self.pickUpSwitchOutlet.isHidden = true
+                    self.pickupModeLabelOutlet.isHidden = true
+                } else if user?.userType == "Driver" {
+                    self.pickUpSwitchOutlet.isHidden = false
+                    self.pickupModeLabelOutlet.isHidden = false
+                    self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled
+                }
+            }
+        } else {
+            
+            self.emailLabelOutlet.isHidden = true
+            self.accountTypeLabelOutlet.isHidden = true
+            self.pickupModeLabelOutlet.isHidden = true
+            self.pickUpSwitchOutlet.isHidden = true
+            self.profileImageViewOutlet.isHidden = true
+            
+        }
 
         
         
@@ -91,8 +120,11 @@ class LeftSidePanelVC: UIViewController {
     @IBAction func signUpLoginBtnActionPressed(_ sender: Any) {
         
         if Auth.auth().currentUser == nil {
+            self.loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
             performSegue(withIdentifier: "loginVCSegue", sender: self)
         } else {
+            self.loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
+            
             logout { (succeed) in
                 if succeed! {
                     print("Logged Out.")
@@ -105,22 +137,7 @@ class LeftSidePanelVC: UIViewController {
             }
         }
         
-//        if Auth.auth().currentUser == nil {
-//            performSegue(withIdentifier: "loginVCSegue", sender: self)
-//        } else {
-//            logout { (success) in
-//                if success! {
-//                    print("Signed out.")
-//                    self.emailLabelOutlet.text = ""
-//                    self.accountTypeLabelOutlet.text = ""
-//                    self.profileImageViewOutlet.isHidden = true
-//                    self.pickupModeLabelOutlet.isHidden = true
-//                    self.pickUpSwitchOutlet.isHidden = true
-//                    self.loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
-//
-//                }
-//            }
-//        }
+
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -144,9 +161,13 @@ extension LeftSidePanelVC:LoginDelegate {
         emailLabelOutlet.text = scoopUser.email
         accountTypeLabelOutlet.text = scoopUser.userType
         pickupModeLabelOutlet.text = "Pickup Mode Enabled"
-        pickupModeLabelOutlet.isHidden = false
         pickUpSwitchOutlet.isOn = scoopUser.isPickUpModeEnabled
         pickUpSwitchOutlet.isHidden = false
+        pickupModeLabelOutlet.isHidden = false
+        profileImageViewOutlet.isHidden = false
+        emailLabelOutlet.isHidden = false
+        accountTypeLabelOutlet.isHidden = false
+        
         
         guard let imgUrlString = scoopUser.profileImageUrl as? String, let imgUrl = URL(string: imgUrlString)  else {
             print("There was a problem downloading the image.")

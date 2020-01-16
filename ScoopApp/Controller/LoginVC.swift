@@ -86,14 +86,14 @@ class LoginVC: UIViewController {
         loginState = .Login
         userType = .Driver
         
-        logout { (succeed) in
-            if succeed! {
-
-                print("Logged Out!!!")
-            } else {
-                print("Logout failed.")
-            }
-        }
+//        logout { (succeed) in
+//            if succeed! {
+//
+//                print("Logged Out!!!")
+//            } else {
+//                print("Logout failed.")
+//            }
+//        }
         
         
     }
