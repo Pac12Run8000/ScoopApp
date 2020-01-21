@@ -77,6 +77,8 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         addTapGesture()
         
+        activityIndicator.layer.cornerRadius = 8
+        
         emailTextFieldOutlet.delegate = self
         passwordTextFieldOutlet.delegate = self
         
@@ -129,6 +131,10 @@ class LoginVC: UIViewController {
                     self.authButtonOutlet.isEnabled = true
                     return
                 }
+                
+
+                
+                
                 
                 if let userId = result?.user.uid as? String {
                     self.acceptUserIdAndSendScoopUser(uId: userId)
@@ -502,6 +508,12 @@ extension LoginVC {
 }
 // MARK:- Error code notes
 extension LoginVC {
+    
+    /*
+        guard let myUser = result?.user, let providerId = myUser.providerID as? String else {
+            return
+        }
+     */
     
     /*
     guard let errorCode = AuthErrorCode(rawValue: 0) else {

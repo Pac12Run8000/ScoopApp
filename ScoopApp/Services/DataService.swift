@@ -16,7 +16,7 @@ class DataService {
     static let instance = DataService()
     
     private var _REF_BASE = DB_BASE
-    private var _REF_USERS = DB_BASE.child("users")
+    private var _REF_USERS = DB_BASE.child("passengers")
     private var _REF_DRIVERS = DB_BASE.child("drivers")
     private var _REF_TRIPS = DB_BASE.child("trips")
     
