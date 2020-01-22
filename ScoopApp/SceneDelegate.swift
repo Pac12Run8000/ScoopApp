@@ -11,6 +11,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let containerVC = ContainerVC()
 
 
     /*
@@ -29,7 +30,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
        //the windowScene object using UIApplication.shared.connectedScenes
         self.window?.windowScene = windowScene
         //let storyBoard: UIStoryboard = UIStoryboard(name: storyBoardName, bundle: nil)
-        let containerVC = ContainerVC()
         window?.rootViewController = containerVC
         window?.makeKeyAndVisible()
         

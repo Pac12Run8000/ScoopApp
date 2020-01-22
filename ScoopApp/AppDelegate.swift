@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate var containerVC = ContainerVC()
     
     var MenuContainerVC:ContainerVC {
+        for scene in UIApplication.shared.connectedScenes {
+            if scene.activationState == .foregroundActive, let sceneDelegate = scene.delegate as? SceneDelegate {
+                return sceneDelegate.containerVC
+            }
+        }
         return containerVC
     }
 
