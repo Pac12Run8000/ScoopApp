@@ -75,4 +75,8 @@ struct ScoopUpUser {
         
     }
     
+    static func setPickUpModeLabel(mySwitch:UISwitch) -> String {
+        return mySwitch.isOn == true ? "PickupMode Enabled" : "PickupMode Disabled"
+    }
+    
 }

@@ -19,6 +19,8 @@ class LeftSidePanelVC: UIViewController {
     @IBOutlet weak var pickupModeLabelOutlet: UILabel!
     
     
+    let appDelegate = AppDelegate.getAppDelegate()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,11 +76,15 @@ class LeftSidePanelVC: UIViewController {
             return
         }
         
-        if (pickUpSwitchOutlet.isOn) {
-            pickupModeLabelOutlet.text = "PickupMode Enabled"
+        if pickUpSwitchOutlet.isOn {
+            appDelegate.MenuContainerVC.toggleLeftPanel()
+            print("Fire:\(pickUpSwitchOutlet.isOn)")
         } else {
-            pickupModeLabelOutlet.text = "PickupMode Disabled"
+            appDelegate.MenuContainerVC.toggleLeftPanel()
+            print("Fire:\(pickUpSwitchOutlet.isOn)")
         }
+        
+        pickupModeLabelOutlet.text = ScoopUpUser.setPickUpModeLabel(mySwitch: pickUpSwitchOutlet)
         ScoopUpUser.togglePickUpMode(uid: uid, toggle: pickUpSwitchOutlet)
     }
     
