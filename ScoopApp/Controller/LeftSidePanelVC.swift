@@ -28,6 +28,7 @@ class LeftSidePanelVC: UIViewController {
                 self.loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
                 self.emailLabelOutlet.text = user?.email
                 self.accountTypeLabelOutlet.text = user?.userType
+                self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled
                 if let urlString = user?.profileImageUrl, let url = URL(string: urlString) {
                     ImageService.downloadAndCacheImage(withUrl: url) { (succeed, image, err) in
                         self.profileImageViewOutlet.image = image
@@ -62,10 +63,18 @@ class LeftSidePanelVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-       
+        
+        
     }
     
 
+    @IBAction func pickUpModeToggleAction(_ sender: Any) {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        ScoopUpUser.togglePickUpMode(uid: uid, toggle: pickUpSwitchOutlet)
+    }
+    
     
     @IBAction func signUpLoginBtnActionPressed(_ sender: Any) {
         

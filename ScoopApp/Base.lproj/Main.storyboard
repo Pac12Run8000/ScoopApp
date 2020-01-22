@@ -307,6 +307,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CD6-dZ-QqH">
                                 <rect key="frame" x="20" y="592" width="51" height="31"/>
+                                <connections>
+                                    <action selector="pickUpModeToggleAction:" destination="wd3-Fi-22Y" eventType="valueChanged" id="VoH-hw-B92"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

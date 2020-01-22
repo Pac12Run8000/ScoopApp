@@ -69,4 +69,10 @@ struct ScoopUpUser {
         }, withCancel: nil)
     }
     
+    
+    static func togglePickUpMode(uid:String, toggle:UISwitch) {
+        toggle.isOn ? Database.database().reference().child("Driver").child(uid).updateChildValues(["isPickUpModeEnabled": true]) : Database.database().reference().child("Driver").child(uid).updateChildValues(["isPickUpModeEnabled": false])
+        
+    }
+    
 }
