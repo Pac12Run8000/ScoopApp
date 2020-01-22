@@ -29,6 +29,7 @@ class LeftSidePanelVC: UIViewController {
                 self.emailLabelOutlet.text = user?.email
                 self.accountTypeLabelOutlet.text = user?.userType
                 self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled
+                self.pickupModeLabelOutlet.text = self.pickUpSwitchOutlet.isOn ? "PickupMode Enabled" : "PickupMode Disabled"
                 if let urlString = user?.profileImageUrl, let url = URL(string: urlString) {
                     ImageService.downloadAndCacheImage(withUrl: url) { (succeed, image, err) in
                         self.profileImageViewOutlet.image = image
@@ -71,6 +72,12 @@ class LeftSidePanelVC: UIViewController {
     @IBAction func pickUpModeToggleAction(_ sender: Any) {
         guard let uid = Auth.auth().currentUser?.uid else {
             return
+        }
+        
+        if (pickUpSwitchOutlet.isOn) {
+            pickupModeLabelOutlet.text = "PickupMode Enabled"
+        } else {
+            pickupModeLabelOutlet.text = "PickupMode Disabled"
         }
         ScoopUpUser.togglePickUpMode(uid: uid, toggle: pickUpSwitchOutlet)
     }
