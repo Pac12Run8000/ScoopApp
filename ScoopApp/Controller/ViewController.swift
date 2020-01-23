@@ -18,15 +18,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     var delegate:CenterVCDelegate?
+    let locationManager = CLLocationManager()
+    let regionInMeters:Double = 10000
     
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: .white)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        checkLocationServices()
         setupAndStartSplashAnimation()
-       
+        mapView.delegate = self
        
     }
     
@@ -47,7 +49,60 @@ class ViewController: UIViewController {
 // MARK:- This is where the locationmanger functionality is located
 extension ViewController: CLLocationManagerDelegate {
     
+    func checkLocationServices() {
+        
+        if (CLLocationManager.locationServicesEnabled()) {
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            print("Location services aren't enabled.")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        
+    }
+    
+   
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locationManager.location?.coordinate {
 
+            let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
+            let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
+    
+    func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    func checkLocationAuthorization() {
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            locationManager.startUpdatingLocation()
+        case .authorizedAlways:
+            mapView.showsUserLocation = true
+            locationManager.startUpdatingLocation()
+            break
+        case .denied:
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+            print("Show alert letting kids know that they are not allowed to access the location.")
+        }
+    }
+    
+
+   
+    
     
 }
 
