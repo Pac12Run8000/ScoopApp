@@ -76,14 +76,7 @@ class LeftSidePanelVC: UIViewController {
             return
         }
         
-        if pickUpSwitchOutlet.isOn {
-            appDelegate.MenuContainerVC.toggleLeftPanel()
-            print("Fire:\(pickUpSwitchOutlet.isOn)")
-        } else {
-            appDelegate.MenuContainerVC.toggleLeftPanel()
-            print("Fire:\(pickUpSwitchOutlet.isOn)")
-        }
-        
+        appDelegate.MenuContainerVC.toggleLeftPanel()
         pickupModeLabelOutlet.text = ScoopUpUser.setPickUpModeLabel(mySwitch: pickUpSwitchOutlet)
         ScoopUpUser.togglePickUpMode(uid: uid, toggle: pickUpSwitchOutlet)
     }

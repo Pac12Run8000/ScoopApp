@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import RevealingSplashView
+import CoreLocation
 
 class ViewController: UIViewController {
     
@@ -16,22 +17,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var actionButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var mapView: MKMapView!
     
-//    let gradient = CAGradientLayer()
-    
-    
     var delegate:CenterVCDelegate?
-    
     
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: .white)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
-        mapView.delegate = self
         setupAndStartSplashAnimation()
        
        
     }
+    
+
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
         actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
@@ -45,6 +44,12 @@ class ViewController: UIViewController {
     
 }
 
+// MARK:- This is where the locationmanger functionality is located
+extension ViewController: CLLocationManagerDelegate {
+    
+
+    
+}
 
 extension ViewController:MKMapViewDelegate {
     
