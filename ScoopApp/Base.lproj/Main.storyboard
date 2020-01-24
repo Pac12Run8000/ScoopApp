@@ -102,6 +102,9 @@
                                     <constraint firstAttribute="width" constant="62" id="Rbg-fF-J6y"/>
                                 </constraints>
                                 <state key="normal" image="centerMapBtn"/>
+                                <connections>
+                                    <action selector="centerButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3BK-pw-4za"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ygw-aF-WCi" customClass="RoundedShadowView" customModule="ScoopApp" customModuleProvider="target">
                                 <rect key="frame" x="20" y="109" width="374" height="80"/>

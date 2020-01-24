@@ -43,11 +43,23 @@ class ViewController: UIViewController {
         delegate?.toggleLeftPanel()
     }
     
+    @IBAction func centerButtonAction(_ sender: Any) {
+        
+        if let location = locationManager.location?.coordinate {
+            let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
+            let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+            mapView.setRegion(region, animated: true)
+        }
+        
+        
+    }
     
 }
 
 // MARK:- This is where the locationmanger functionality is located
 extension ViewController: CLLocationManagerDelegate {
+    
+    
     
     func checkLocationServices() {
         
