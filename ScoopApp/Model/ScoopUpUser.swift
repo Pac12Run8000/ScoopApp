@@ -13,7 +13,7 @@ struct ScoopUpUser {
     
     var userType:String
     var uId:String
-    var isPickUpModeEnabled:Bool
+    var isPickUpModeEnabled:Bool?
     var profileImageUrl:String
     var userName:String
     var email:String
@@ -39,7 +39,10 @@ struct ScoopUpUser {
                             passenger.userType = "Passenger"
                             passenger.userName = snap.childSnapshot(forPath: "username").value as! String
                             passenger.email = snap.childSnapshot(forPath: "email").value as! String
-                            passenger.isPickUpModeEnabled = snap.childSnapshot(forPath: "isPickUpModeEnabled").value as! Bool
+                            
+//                            if let pickUpModeEnabled = snap.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool {
+//                                passenger.isPickUpModeEnabled = pickUpModeEnabled
+//                            }
                             passenger.profileImageUrl = snap.childSnapshot(forPath: "profileImageUrl").value as! String
                             completion(passenger, true)
                         }

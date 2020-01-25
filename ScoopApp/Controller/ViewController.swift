@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import RevealingSplashView
 import CoreLocation
+import Firebase
 
 class ViewController: UIViewController {
     
@@ -117,8 +118,43 @@ extension ViewController: CLLocationManagerDelegate {
     
     
 }
-
+// MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
+        guard let uid = Auth.auth().currentUser?.uid else {
+            print("No uid.")
+            return
+        }
+        
+        ScoopUpUser.observePassengersAndDriver(uId: uid) { (user, didSucceed) in
+            if !didSucceed {
+                print("No user.")
+                return
+            }
+            
+            
+            switch user?.userType {
+            case "Driver":
+                print("This is a driver")
+                UpdateService.instance.updateDriverLocation(withCoordinate: userLocation.coordinate)
+                break
+            case "Passenger":
+                print("This is a passenger")
+                UpdateService.instance.updatePassengerLocation(withCoordinate: userLocation.coordinate)
+                break
+            default:
+                break
+            }
+        }
+        
+//        UpdateService.instance.updateDriverLocation(withCoordinate: userLocation.coordinate)
+//        UpdateService.instance.updatePassengerLocation(withCoordinate: userLocation.coordinate)
+        
+        
+        
+    }
     
 }
 // MARK:- Setting up the splashView functionality

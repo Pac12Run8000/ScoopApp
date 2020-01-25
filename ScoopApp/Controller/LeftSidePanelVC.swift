@@ -30,7 +30,7 @@ class LeftSidePanelVC: UIViewController {
                 self.loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
                 self.emailLabelOutlet.text = user?.email
                 self.accountTypeLabelOutlet.text = user?.userType
-                self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled
+                self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled!
                 self.pickupModeLabelOutlet.text = self.pickUpSwitchOutlet.isOn ? "PickupMode Enabled" : "PickupMode Disabled"
                 if let urlString = user?.profileImageUrl, let url = URL(string: urlString) {
                     ImageService.downloadAndCacheImage(withUrl: url) { (succeed, image, err) in
@@ -44,7 +44,7 @@ class LeftSidePanelVC: UIViewController {
                 } else if user?.userType == "Driver" {
                     self.pickUpSwitchOutlet.isHidden = false
                     self.pickupModeLabelOutlet.isHidden = false
-                    self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled
+                    self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled!
                 }
             }
         } else {
@@ -135,7 +135,7 @@ extension LeftSidePanelVC:LoginDelegate {
         } else if scoopUser.userType == "Driver" {
             self.pickUpSwitchOutlet.isHidden = false
             self.pickupModeLabelOutlet.isHidden = false
-            self.pickUpSwitchOutlet.isOn = scoopUser.isPickUpModeEnabled
+            self.pickUpSwitchOutlet.isOn = scoopUser.isPickUpModeEnabled!
         }
         
 

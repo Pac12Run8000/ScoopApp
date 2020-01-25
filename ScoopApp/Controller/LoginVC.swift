@@ -481,7 +481,11 @@ extension LoginVC {
                 let ref = Database.database().reference()
                 let userRef = ref.child(userType.rawValue).child(userID)
                 
-                let values = ["username": username, "email": email, "profileImageUrl": url?.absoluteString, "isPickUpModeEnabled": false] as [String : AnyObject]
+                var values = ["username": username, "email": email, "profileImageUrl": url?.absoluteString] as [String : AnyObject]
+                
+                if userType == .Driver {
+                    values["isPickUpModeEnabled"] = false as AnyObject
+                }
                 
                 userRef.updateChildValues(values) { [unowned self] (err, reference) in
                     guard err == nil else {
