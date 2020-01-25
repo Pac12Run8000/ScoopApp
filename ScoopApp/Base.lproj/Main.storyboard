@@ -359,7 +359,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="freeway-2" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-T8-BVj">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jonathan-simcoe" translatesAutoresizingMaskIntoConstraints="NO" id="TEL-T8-BVj">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fCQ-Kb-cZg">
@@ -556,7 +556,7 @@
     <resources>
         <image name="cancelBtn" width="32" height="31"/>
         <image name="centerMapBtn" width="62" height="62"/>
-        <image name="freeway-2" width="2336" height="4160"/>
+        <image name="jonathan-simcoe" width="4896" height="3264"/>
         <image name="menuSliderBtn" width="30" height="24"/>
     </resources>
 </document>
