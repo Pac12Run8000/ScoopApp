@@ -29,6 +29,7 @@
 		098FCEF323BC03FC0024E38B /* RoundedShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF223BC03FC0024E38B /* RoundedShadowButton.swift */; };
 		098FCEF523BD19EA0024E38B /* LeftSidePanelVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */; };
 		098FCEF723BD23E30024E38B /* ContainerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEF623BD23E30024E38B /* ContainerVC.swift */; };
+		09F6F16123E1FD5000040588 /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F6F16023E1FD5000040588 /* DriverAnnotation.swift */; };
 		8B67CC8EC2FBB591E57031BF /* Pods_ScoopApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BA32637191782EE8605454D /* Pods_ScoopApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +58,7 @@
 		098FCEF223BC03FC0024E38B /* RoundedShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedShadowButton.swift; sourceTree = "<group>"; };
 		098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftSidePanelVC.swift; sourceTree = "<group>"; };
 		098FCEF623BD23E30024E38B /* ContainerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerVC.swift; sourceTree = "<group>"; };
+		09F6F16023E1FD5000040588 /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		1B9A708A3742E59B6B717623 /* Pods-ScoopApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoopApp.debug.xcconfig"; path = "Target Support Files/Pods-ScoopApp/Pods-ScoopApp.debug.xcconfig"; sourceTree = "<group>"; };
 		4DA4153F3D899A9ABA12AC91 /* Pods-ScoopApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ScoopApp.release.xcconfig"; path = "Target Support Files/Pods-ScoopApp/Pods-ScoopApp.release.xcconfig"; sourceTree = "<group>"; };
 		5BA32637191782EE8605454D /* Pods_ScoopApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ScoopApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,6 +160,7 @@
 				098FCEF023BBFC0D0024E38B /* CircleView.swift */,
 				098FCEF223BC03FC0024E38B /* RoundedShadowButton.swift */,
 				092BDC1D23C426C30089426B /* RoundedCornerTextField.swift */,
+				09F6F16023E1FD5000040588 /* DriverAnnotation.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				092FB09523C7E8D10033F75B /* DataService.swift in Sources */,
 				092BDC1C23C411BE0089426B /* LoginVC.swift in Sources */,
 				098FCEF123BBFC0D0024E38B /* CircleView.swift in Sources */,
+				09F6F16123E1FD5000040588 /* DriverAnnotation.swift in Sources */,
 				098CE46C23CF163F00FFBF50 /* ImageService.swift in Sources */,
 				09311C5023B9CCFC007A5126 /* SceneDelegate.swift in Sources */,
 				092BDC1E23C426C30089426B /* RoundedCornerTextField.swift in Sources */,

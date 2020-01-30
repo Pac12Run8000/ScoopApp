@@ -30,6 +30,16 @@ class ViewController: UIViewController {
         checkLocationServices()
         setupAndStartSplashAnimation()
         mapView.delegate = self
+        
+        DataService.instance.REF_DRIVERS.observe(.childChanged) { (snapshot) in
+            print("Value has changed")
+        }
+        
+//        self.loadDriverAnnotationsFromFB()
+//        DataService.instance.REF_DRIVERS.observe(.value) { (snapshot) in
+//            self.loadDriverAnnotationsFromFB()
+//        }
+        
        
     }
     
@@ -59,6 +69,47 @@ class ViewController: UIViewController {
 
 // MARK:- This is where the locationmanger functionality is located
 extension ViewController: CLLocationManagerDelegate {
+    
+    func loadDriverAnnotationsFromFB() {
+        
+
+        
+        
+        DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value) { (snapshot) in
+            if let driverSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for driver in driverSnapshot {
+                    if driver.hasChild("coordinate") {
+                        if driver.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool == true {
+                            
+                            if let driverDict = driver.value as? Dictionary<String, AnyObject> {
+                                let coordinateArray = driverDict["coordinate"] as! NSArray
+                                let driverCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
+                                let annotation = DriverAnnotation(coordinate: driverCoordinate, key: driver.key)
+                                self.mapView.addAnnotation(annotation)
+//                                var driverIsVisible: Bool {
+//                                    return self.mapView.annotations.contains { (annotations) -> Bool in
+//                                        if let driverAnnotation = annotation as? DriverAnnotation {
+//                                            if driverAnnotation.key == driver.key {
+//                                                driverAnnotation.updateAnnotationPosition(annotation: driverAnnotation, coordinate: driverCoordinate)
+//                                                return true
+//                                            }
+//                                        }
+//                                        return false
+//                                    }
+//                                }
+                                
+//                                if !driverIsVisible {
+//                                    self.mapView.addAnnotation(annotation)
+//                                }
+                                
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
     
     
     
@@ -149,11 +200,18 @@ extension ViewController:MKMapViewDelegate {
             }
         }
         
-//        UpdateService.instance.updateDriverLocation(withCoordinate: userLocation.coordinate)
-//        UpdateService.instance.updatePassengerLocation(withCoordinate: userLocation.coordinate)
-        
-        
-        
+
+    }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? DriverAnnotation {
+            let identifier = "driver"
+            var view:MKAnnotationView
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.image = UIImage(named: "driverAnnotation")
+            return view
+        }
+        return nil
     }
     
 }
