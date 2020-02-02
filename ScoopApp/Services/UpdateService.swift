@@ -49,7 +49,7 @@ class UpdateService {
                             if driver.key == uid {
                                
                                 if driver.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool == true {
-                                    print("Driver:\(driver.key)")
+//                                    print("Driver:\(driver.key)")
                                     DataService.instance.REF_DRIVERS.child(driver.key).updateChildValues(["coordinate":[coordinate.latitude, coordinate.longitude]])
                                 }
                             }

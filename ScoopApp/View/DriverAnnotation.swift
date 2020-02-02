@@ -24,9 +24,7 @@ class DriverAnnotation: NSObject, MKAnnotation {
         location.latitude = coordinate.latitude
         location.longitude = coordinate.longitude
         UIView.animate(withDuration: 0.2) {
-//            DispatchQueue.main.async {
-                self.coordinate = location
-//            }
+            self.coordinate = location
         }
     }
     

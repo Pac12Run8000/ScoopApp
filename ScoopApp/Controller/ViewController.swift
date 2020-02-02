@@ -31,14 +31,14 @@ class ViewController: UIViewController {
         setupAndStartSplashAnimation()
         mapView.delegate = self
         
-        DataService.instance.REF_DRIVERS.observe(.childChanged) { (snapshot) in
-            print("Value has changed")
-        }
+        DataService.instance.REF_DRIVERS.observe(.value, with: { (snapshot) in
+            self.loadDriverAnnotationsFromFB()
+        })
         
-//        self.loadDriverAnnotationsFromFB()
-//        DataService.instance.REF_DRIVERS.observe(.value) { (snapshot) in
-//            self.loadDriverAnnotationsFromFB()
-//        }
+        
+        
+        
+
         
        
     }
@@ -70,45 +70,43 @@ class ViewController: UIViewController {
 // MARK:- This is where the locationmanger functionality is located
 extension ViewController: CLLocationManagerDelegate {
     
-    func loadDriverAnnotationsFromFB() {
-        
 
-        
-        
-        DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value) { (snapshot) in
+    
+    func loadDriverAnnotationsFromFB() {
+        DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (snapshot) in
             if let driverSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
                 for driver in driverSnapshot {
                     if driver.hasChild("coordinate") {
                         if driver.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool == true {
-                            
+
                             if let driverDict = driver.value as? Dictionary<String, AnyObject> {
                                 let coordinateArray = driverDict["coordinate"] as! NSArray
                                 let driverCoordinate = CLLocationCoordinate2D(latitude: coordinateArray[0] as! CLLocationDegrees, longitude: coordinateArray[1] as! CLLocationDegrees)
                                 let annotation = DriverAnnotation(coordinate: driverCoordinate, key: driver.key)
-                                self.mapView.addAnnotation(annotation)
-//                                var driverIsVisible: Bool {
-//                                    return self.mapView.annotations.contains { (annotations) -> Bool in
-//                                        if let driverAnnotation = annotation as? DriverAnnotation {
-//                                            if driverAnnotation.key == driver.key {
-//                                                driverAnnotation.updateAnnotationPosition(annotation: driverAnnotation, coordinate: driverCoordinate)
-//                                                return true
-//                                            }
-//                                        }
-//                                        return false
-//                                    }
-//                                }
                                 
-//                                if !driverIsVisible {
-//                                    self.mapView.addAnnotation(annotation)
-//                                }
+                                var driverIsVisable:Bool {
+                                    return self.mapView.annotations.contains(where: { (annotation) -> Bool in
+                                        if let driverAnnotation = annotation as? DriverAnnotation {
+                                            if driverAnnotation.key == driver.key {
+                                                
+                                                driverAnnotation.updateAnnotationPosition(annotation: driverAnnotation, coordinate: driverCoordinate)
+                                                return true
+                                            }
+                                        }
+                                        return false
+                                    })
+                                }
+                                
+                                if !driverIsVisable {
+                                    self.mapView.addAnnotation(annotation)
+                                }
                                 
                             }
-                            
                         }
                     }
                 }
             }
-        }
+        })
     }
     
     
@@ -174,6 +172,8 @@ extension ViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
+        
+        // MARK:- This finds the data for current loggedIn driver
         guard let uid = Auth.auth().currentUser?.uid else {
             print("No uid.")
             return
@@ -189,6 +189,9 @@ extension ViewController:MKMapViewDelegate {
             switch user?.userType {
             case "Driver":
                 print("This is a driver")
+                print("coordinates for current loggedIn Driver:", userLocation.coordinate)
+                
+                
                 UpdateService.instance.updateDriverLocation(withCoordinate: userLocation.coordinate)
                 break
             case "Passenger":
