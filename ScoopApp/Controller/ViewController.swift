@@ -34,12 +34,6 @@ class ViewController: UIViewController {
         DataService.instance.REF_DRIVERS.observe(.value, with: { (snapshot) in
             self.loadDriverAnnotationsFromFB()
         })
-        
-        
-        
-        
-
-        
        
     }
     
@@ -74,9 +68,19 @@ extension ViewController: CLLocationManagerDelegate {
     
     func loadDriverAnnotationsFromFB() {
         DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (snapshot) in
-            if let driverSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+            
+            guard let driverSnapshot = snapshot.children.allObjects as? [DataSnapshot] else {
+                print("Could not retrieve a driver snapshot.")
+                return
+            }
                 for driver in driverSnapshot {
-                    if driver.hasChild("coordinate") {
+                    
+                    
+                    guard driver.hasChild("coordinate") else {
+                        print("The driver doesn't have a coordinate")
+                        return
+                    }
+                    
                         if driver.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool == true {
 
                             if let driverDict = driver.value as? Dictionary<String, AnyObject> {
@@ -103,9 +107,9 @@ extension ViewController: CLLocationManagerDelegate {
                                 
                             }
                         }
-                    }
+//                    }
+                    
                 }
-            }
         })
     }
     
