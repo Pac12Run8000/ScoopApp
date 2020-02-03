@@ -17,6 +17,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var actionButtonOutlet: RoundedShadowButton!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var centerMapButtonOutlet: UIButton!
     
     var delegate:CenterVCDelegate?
     let locationManager = CLLocationManager()
@@ -106,9 +107,19 @@ extension ViewController: CLLocationManagerDelegate {
                                 }
                                 
                             }
+                        } else {
+                            
+                            for annotation in self.mapView.annotations {
+                                if annotation.isKind(of: DriverAnnotation.self) {
+                                    if let annotation = annotation as? DriverAnnotation {
+                                        if annotation.key == driver.key {
+                                            self.mapView.removeAnnotation(annotation)
+                                        }
+                                    }
+                                }
+                            }
+                            
                         }
-//                    }
-                    
                 }
         })
     }
@@ -173,6 +184,11 @@ extension ViewController: CLLocationManagerDelegate {
 }
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
+        
+    }
+    
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
