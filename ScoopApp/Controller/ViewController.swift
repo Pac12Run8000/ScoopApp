@@ -77,7 +77,7 @@ extension ViewController: CLLocationManagerDelegate {
                     
                     
                     guard driver.hasChild("coordinate") else {
-                        print("The driver doesn't have a coordinate")
+                        print("The driver doesn't have a coordinate", driver.childSnapshot(forPath: "email").value as? String)
                         return
                     }
                     
