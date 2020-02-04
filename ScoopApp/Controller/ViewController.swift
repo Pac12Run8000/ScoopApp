@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     let locationManager = CLLocationManager()
     let regionInMeters:Double = 10000
     var tableView = UITableView()
+    var matchingItems:[MKMapItem] = [MKMapItem]()
     
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: .white)
 
@@ -190,6 +191,39 @@ extension ViewController: CLLocationManagerDelegate {
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
     
+    func performSearch() {
+        matchingItems.removeAll()
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = destTextFieldOutlet.text
+        request.region = mapView.region
+        
+        let search = MKLocalSearch(request: request)
+        search.start { (response, error) in
+            guard error == nil else {
+                print("There was an error getting search results:", error?.localizedDescription)
+                return
+            }
+            
+            guard (response?.mapItems.count)! > 0 else {
+                print("There were no results")
+                return
+            }
+            
+            for mapItem in response!.mapItems {
+                self.matchingItems.append(mapItem as MKMapItem)
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
+            
+            
+            
+            
+        }
+    }
+    
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         centerMapButtonOutlet.fadeTo(alphaValue: 1.0, withDuration: 0.2)
     }
@@ -304,7 +338,7 @@ extension ViewController:UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == destTextFieldOutlet {
-            
+            performSearch()
             view.endEditing(true)
         }
         
@@ -323,7 +357,10 @@ extension ViewController:UITextFieldDelegate {
     }
     
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        
+        matchingItems = [MKMapItem]()
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
         return true
     }
     
@@ -332,11 +369,15 @@ extension ViewController:UITextFieldDelegate {
 extension ViewController:UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return matchingItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell(style: .default, reuseIdentifier: "locationCell")
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "locationCell")
+        let mapItem = matchingItems[indexPath.row]
+        cell.textLabel?.text = mapItem.name
+        cell.detailTextLabel?.text = mapItem.placemark.title
+        return cell
     }
     
     
