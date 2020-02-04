@@ -55,6 +55,7 @@ class ViewController: UIViewController {
             let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
             let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
             mapView.setRegion(region, animated: true)
+            centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
         }
         
         
@@ -186,7 +187,7 @@ extension ViewController: CLLocationManagerDelegate {
 extension ViewController:MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
-        
+        centerMapButtonOutlet.fadeTo(alphaValue: 1.0, withDuration: 0.2)
     }
     
     
