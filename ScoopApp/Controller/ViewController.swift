@@ -297,7 +297,7 @@ extension ViewController:UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField == destTextFieldOutlet {
-            tableView.frame = CGRect(x: 20, y: view.frame.height, width: view.frame.width - 40, height: view.frame.height - 170)
+            tableView.frame = CGRect(x: 20, y: view.frame.height, width: view.frame.width - 40, height: view.frame.height - 340)
             tableView.layer.cornerRadius = 5.0
             tableView.register(UITableViewCell.self, forCellReuseIdentifier: "locationCell")
             tableView.delegate = self
@@ -321,11 +321,11 @@ extension ViewController:UITextFieldDelegate {
     func animateTableView(shouldShow:Bool) {
         if shouldShow {
             UIView.animate(withDuration: 0.2) {
-                self.tableView.frame = CGRect(x: 20, y: 200, width: self.view.frame.width - 40, height: self.view.frame.height - 170)
+                self.tableView.frame = CGRect(x: 20, y: 200, width: self.view.frame.width - 40, height: self.view.frame.height - 340)
             }
         } else {
             UIView.animate(withDuration: 0.2, animations: {
-                self.tableView.frame = CGRect(x: 20, y: self.view.frame.height, width: self.view.frame.width - 40, height: self.view.frame.height - 170)
+                self.tableView.frame = CGRect(x: 20, y: self.view.frame.height, width: self.view.frame.width - 40, height: self.view.frame.height - 340)
             }) { (finished) in
                 for subview in self.view.subviews {
                     if subview.tag == 18 {
