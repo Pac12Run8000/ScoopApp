@@ -31,6 +31,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(showHeight), name: UIResponder.keyboardDidShowNotification, object: nil)
 
         checkLocationServices()
         setupAndStartSplashAnimation()
@@ -42,6 +44,14 @@ class ViewController: UIViewController {
         })
        
     }
+    
+//    @objc func showHeight(_ sender:Notification) {
+//
+//        guard let notification = sender.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
+//            return
+//        }
+//        print("notification:", notification.height)
+//    }
     
 
 
