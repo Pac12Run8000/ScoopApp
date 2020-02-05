@@ -393,6 +393,16 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
         return 1
     }
     
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        if destTextFieldOutlet.text!.isEmpty || destTextFieldOutlet.text == "" {
+            animateTableView(shouldShow: false)
+        }
+    }
+    
     
     
 }
