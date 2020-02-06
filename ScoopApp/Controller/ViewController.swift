@@ -26,6 +26,7 @@ class ViewController: UIViewController {
     let regionInMeters:Double = 10000
     var tableView = UITableView()
     var matchingItems:[MKMapItem] = [MKMapItem]()
+    var currentUserId = Auth.auth().currentUser?.uid
     
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: .white)
 
@@ -44,6 +45,8 @@ class ViewController: UIViewController {
         })
        
     }
+    
+    
     
 //    @objc func showHeight(_ sender:Notification) {
 //
@@ -282,6 +285,12 @@ extension ViewController:MKMapViewDelegate {
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.image = UIImage(named: "driverAnnotation")
             return view
+        } else if let annotation = annotation as? PassengerAnnotation {
+            let identifier = "passenger"
+            var view:MKAnnotationView
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.image = UIImage(named: "currentLocationAnnotation")
+            return view
         }
         return nil
     }
@@ -346,6 +355,8 @@ extension ViewController:UITextFieldDelegate {
         }
     }
     
+    
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == destTextFieldOutlet {
             performSearch()
@@ -393,6 +404,16 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        
+        let passengerCoordinate = locationManager.location?.coordinate
+        
+        let passengerAnnotation = PassengerAnnotation(coordinate: passengerCoordinate!, key: currentUserId!)
+        mapView.addAnnotation(passengerAnnotation)
+        
+        destTextFieldOutlet.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
+        let selectedmapItem = matchingItems[indexPath.row]
+        print("current userId:", currentUserId)
+        DataService.instance.REF_USERS.child(currentUserId!).updateChildValues(["tripCoordinate":[selectedmapItem.placemark.coordinate.latitude, selectedmapItem.placemark.coordinate.longitude]])
         animateTableView(shouldShow: false)
        
         print("selected")
