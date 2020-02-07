@@ -32,17 +32,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-<<<<<<< HEAD
-        
-//        logout { (succeed) in
-//            if succeed! {
-//                print("Logged Out")
-//            }
-//        }
-        
-//        NotificationCenter.default.addObserver(self, selector: #selector(showHeight), name: UIResponder.keyboardDidShowNotification, object: nil)
-=======
->>>>>>> parent of 471f206... feat: Added some commented code getting the keyboard height
+
 
         checkLocationServices()
         setupAndStartSplashAnimation()
@@ -55,19 +45,6 @@ class ViewController: UIViewController {
        
     }
     
-<<<<<<< HEAD
-    
-    
-//    @objc func showHeight(_ sender:Notification) {
-//
-//        guard let notification = sender.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-//            return
-//        }
-//        print("notification:", notification.height)
-//    }
-    
-=======
->>>>>>> parent of 471f206... feat: Added some commented code getting the keyboard height
 
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
