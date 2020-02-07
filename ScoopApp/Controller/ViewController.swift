@@ -32,7 +32,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 
 
         checkLocationServices()
@@ -46,9 +45,7 @@ class ViewController: UIViewController {
        
     }
     
-    
 
-    
 
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
@@ -278,13 +275,7 @@ extension ViewController:MKMapViewDelegate {
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.image = UIImage(named: "driverAnnotation")
             return view
-        } else if let annotation = annotation as? PassengerAnnotation {
-            let identifier = "passenger"
-            var view:MKAnnotationView
-            view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            view.image = UIImage(named: "currentLocationAnnotation")
-            return view
-        }
+        } 
         return nil
     }
     
@@ -426,6 +417,18 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
     
     
     
+}
+// MARK:- Logout functionality
+extension ViewController {
+    private func logout(completion:@escaping(_ success:Bool?) -> ()) {
+           do {
+               try Auth.auth().signOut()
+               completion(true)
+           } catch {
+               print("error:\(error.localizedDescription)")
+               completion(false)
+           }
+       }
 }
 
 
