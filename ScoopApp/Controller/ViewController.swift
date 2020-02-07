@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        NotificationCenter.default.addObserver(self, selector: #selector(showHeight), name: UIResponder.keyboardDidShowNotification, object: nil)
+
 
         checkLocationServices()
         setupAndStartSplashAnimation()
@@ -47,14 +47,7 @@ class ViewController: UIViewController {
     }
     
     
-    
-//    @objc func showHeight(_ sender:Notification) {
-//
-//        guard let notification = sender.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as? CGRect else {
-//            return
-//        }
-//        print("notification:", notification.height)
-//    }
+
     
 
 
@@ -413,10 +406,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
         destTextFieldOutlet.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
         let selectedmapItem = matchingItems[indexPath.row]
         print("current userId:", currentUserId)
-        DataService.instance.REF_USERS.child(currentUserId!).updateChildValues(["tripCoordinate":[selectedmapItem.placemark.coordinate.latitude, selectedmapItem.placemark.coordinate.longitude]])
-        animateTableView(shouldShow: false)
-       
-        print("selected")
+        
     }
 
     
