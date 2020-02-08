@@ -275,7 +275,13 @@ extension ViewController:MKMapViewDelegate {
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.image = UIImage(named: "driverAnnotation")
             return view
-        } 
+        } else if let annotation = annotation as? PassengerAnnotation {
+            let identifier = "passenger"
+            var view:MKAnnotationView
+            view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            view.image = UIImage(named: "currentLocationAnnotation")
+            return view
+        }
         return nil
     }
     
@@ -395,7 +401,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
         mapView.addAnnotation(passengerAnnotation)
         
         destTextFieldOutlet.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
-        let selectedmapItem = matchingItems[indexPath.row]
+        let selectedMapItem = matchingItems[indexPath.row]
         print("current userId:", currentUserId)
         
     }

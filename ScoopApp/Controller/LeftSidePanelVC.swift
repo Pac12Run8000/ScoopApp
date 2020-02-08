@@ -27,7 +27,7 @@ class LeftSidePanelVC: UIViewController {
         
         if let uid = Auth.auth().currentUser?.uid {
             ScoopUpUser.observePassengersAndDriver(uId: uid) { (user, succeed) in
-                self.loginLogoutButtonOutlet.setTitle("Log Out", for: .normal)
+                self.loginLogoutButtonOutlet.setTitle("Sign Up / Login", for: .normal)
                 self.emailLabelOutlet.text = user?.email
                 self.accountTypeLabelOutlet.text = user?.userType
                 self.pickUpSwitchOutlet.isOn = user!.isPickUpModeEnabled!

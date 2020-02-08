@@ -27,6 +27,10 @@ struct ScoopUpUser {
         self.email = ""
     }
     
+    static func getDataForDriverOrPassenger(uid:String, completion handlet:@escaping(_ user:ScoopUpUser,_ error:Error?) -> ()) {
+        
+    }
+    
     static func observePassengersAndDriver(uId:String, completion:@escaping(_ user:ScoopUpUser?,_ succeed:Bool) -> ()) {
     
             Database.database().reference().child("Passenger").observeSingleEvent(of: .value, with: { (snapshot) in
