@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        
         checkLocationServices()
         setupAndStartSplashAnimation()
         mapView.delegate = self
@@ -42,10 +42,14 @@ class ViewController: UIViewController {
         DataService.instance.REF_DRIVERS.observe(.value, with: { (snapshot) in
             self.loadDriverAnnotationsFromFB()
         })
+        var gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
+        mapView.addGestureRecognizer(gestureRecognizer)
        
     }
     
-
+    @objc func removeKeyboard() {
+        mapView.endEditing(true)
+    }
 
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
@@ -227,6 +231,8 @@ extension ViewController:MKMapViewDelegate {
         }
     }
     
+    
+    
     func mapView(_ mapView: MKMapView, regionWillChangeAnimated animated: Bool) {
         centerMapButtonOutlet.fadeTo(alphaValue: 1.0, withDuration: 0.2)
     }
@@ -402,7 +408,23 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
         
         destTextFieldOutlet.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
         let selectedMapItem = matchingItems[indexPath.row]
-        print("current userId:", currentUserId)
+        animateTableView(shouldShow: false)
+        
+        ScoopUpUser.observePassengersAndDriver(uId: currentUserId!) { (scoopUser, succeed) in
+            guard succeed else { return }
+                switch scoopUser?.userType {
+                case "Driver":
+                    print("Driver")
+                case "Passenger":
+                    print("Passenger")
+                    DataService.instance.REF_USERS.child(self.currentUserId!).updateChildValues(["tripCoordinate":[selectedMapItem.placemark.coordinate.latitude, selectedMapItem.placemark.coordinate.longitude]])
+                    
+                default:
+                    print("I don't know.")
+                }
+        }
+        
+
         
     }
 

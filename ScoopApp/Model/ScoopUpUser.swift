@@ -27,9 +27,7 @@ struct ScoopUpUser {
         self.email = ""
     }
     
-    static func getDataForDriverOrPassenger(uid:String, completion handlet:@escaping(_ user:ScoopUpUser,_ error:Error?) -> ()) {
-        
-    }
+
     
     static func observePassengersAndDriver(uId:String, completion:@escaping(_ user:ScoopUpUser?,_ succeed:Bool) -> ()) {
     
@@ -43,10 +41,6 @@ struct ScoopUpUser {
                             passenger.userType = "Passenger"
                             passenger.userName = snap.childSnapshot(forPath: "username").value as! String
                             passenger.email = snap.childSnapshot(forPath: "email").value as! String
-                            
-//                            if let pickUpModeEnabled = snap.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool {
-//                                passenger.isPickUpModeEnabled = pickUpModeEnabled
-//                            }
                             passenger.profileImageUrl = snap.childSnapshot(forPath: "profileImageUrl").value as! String
                             completion(passenger, true)
                         }
