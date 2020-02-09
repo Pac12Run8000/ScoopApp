@@ -42,15 +42,11 @@ class ViewController: UIViewController {
         DataService.instance.REF_DRIVERS.observe(.value, with: { (snapshot) in
             self.loadDriverAnnotationsFromFB()
         })
-        var gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
-        mapView.addGestureRecognizer(gestureRecognizer)
+       
        
     }
     
-    @objc func removeKeyboard() {
-        mapView.endEditing(true)
-    }
-
+    
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
         actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
@@ -409,7 +405,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
         destTextFieldOutlet.text = tableView.cellForRow(at: indexPath)?.textLabel?.text
         let selectedMapItem = matchingItems[indexPath.row]
         animateTableView(shouldShow: false)
-        
+        view.endEditing(true)
         ScoopUpUser.observePassengersAndDriver(uId: currentUserId!) { (scoopUser, succeed) in
             guard succeed else { return }
                 switch scoopUser?.userType {
