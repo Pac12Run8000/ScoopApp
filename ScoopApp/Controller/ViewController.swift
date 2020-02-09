@@ -27,8 +27,9 @@ class ViewController: UIViewController {
     var tableView = UITableView()
     var matchingItems:[MKMapItem] = [MKMapItem]()
     var currentUserId = Auth.auth().currentUser?.uid
-    
     let revealingSplashView = RevealingSplashView(iconImage: UIImage(named: "launchScreenIcon")!, iconInitialSize: CGSize(width: 80, height: 80), backgroundColor: .white)
+    var selectedItemPlacemark:MKPlacemark? = nil
+    var route:MKRoute!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -194,6 +195,55 @@ extension ViewController: CLLocationManagerDelegate {
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
     
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let lineRenderer = MKPolylineRenderer(overlay: self.route.polyline)
+        lineRenderer.strokeColor = UIColor(red: 3/255, green: 115/255, blue: 140/255, alpha: 1.0)
+        lineRenderer.lineWidth = 3
+        lineRenderer.lineJoin = .round
+        lineRenderer.lineCap = .butt
+        return lineRenderer
+    }
+    
+    func searchMapKitForResultsWithPolyline(mapItem:MKMapItem) {
+        let request = MKDirections.Request()
+        request.source = MKMapItem.forCurrentLocation()
+        request.destination = mapItem
+        request.transportType = .automobile
+        
+        let directions = MKDirections(request: request)
+        directions.calculate { (response, error) in
+            guard error == nil else {
+                print("There was an error:", error?.localizedDescription)
+                return
+            }
+            guard let _ = response else {
+                print("There was no response")
+                return
+            }
+            
+            self.route = response?.routes[0]
+            self.mapView.addOverlay(self.route.polyline)
+            
+        }
+    }
+    
+    
+    func dropPinFor(placemark: MKPlacemark) {
+        selectedItemPlacemark = placemark
+        
+        for annotation in mapView.annotations {
+            if annotation.isKind(of: MKPointAnnotation.self) {
+                mapView.removeAnnotation(annotation)
+            }
+        }
+    
+        
+        
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = placemark.coordinate
+        mapView.addAnnotation(annotation)
+    }
+    
     func performSearch() {
         matchingItems.removeAll()
         let request = MKLocalSearch.Request()
@@ -283,6 +333,17 @@ extension ViewController:MKMapViewDelegate {
             view = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             view.image = UIImage(named: "currentLocationAnnotation")
             return view
+        } else if let annotation = annotation as? MKPointAnnotation {
+            let identifier = "destination"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            } else {
+                annotationView?.annotation = annotation
+            }
+            annotationView?.image = UIImage(named: "destinationAnnotation")
+            return annotationView
         }
         return nil
     }
@@ -414,6 +475,9 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
                 case "Passenger":
                     print("Passenger")
                     DataService.instance.REF_USERS.child(self.currentUserId!).updateChildValues(["tripCoordinate":[selectedMapItem.placemark.coordinate.latitude, selectedMapItem.placemark.coordinate.longitude]])
+                    
+                    self.dropPinFor(placemark: selectedMapItem.placemark)
+                    self.searchMapKitForResultsWithPolyline(mapItem: selectedMapItem)
                     
                 default:
                     print("I don't know.")
