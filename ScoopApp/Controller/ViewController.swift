@@ -195,7 +195,31 @@ extension ViewController: CLLocationManagerDelegate {
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
     
-    
+    func zoom(mapView:MKMapView) {
+        guard mapView.annotations.count != 0 else {
+            print("There are no annotations.")
+            return
+        }
+        
+        var topLeftCoordinate = CLLocationCoordinate2D(latitude: -90, longitude: 180)
+        var bottomRightCoordinate = CLLocationCoordinate2D(latitude: 90, longitude: -180)
+        for annotation in mapView.annotations where !annotation.isKind(of: DriverAnnotation.self) {
+            
+            
+            
+            topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude)
+            topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude)
+            bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude)
+            bottomRightCoordinate.latitude = fmin(bottomRightCoordinate.latitude, annotation.coordinate.latitude)
+            
+        }
+        
+
+        var region = MKCoordinateRegion(center: CLLocationCoordinate2DMake(topLeftCoordinate.latitude - (topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 0.5, topLeftCoordinate.longitude + (bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 0.5), span: MKCoordinateSpan(latitudeDelta: fabs(topLeftCoordinate.latitude - bottomRightCoordinate.latitude) * 2.0, longitudeDelta: fabs(bottomRightCoordinate.longitude - topLeftCoordinate.longitude) * 2.0))
+        
+        region = mapView.regionThatFits(region)
+        mapView.setRegion(region, animated: true)
+    }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let lineRenderer = MKPolylineRenderer(overlay: self.route.polyline)
@@ -203,6 +227,8 @@ extension ViewController:MKMapViewDelegate {
         lineRenderer.lineWidth = 3
         lineRenderer.lineJoin = .round
         lineRenderer.lineCap = .butt
+        
+        zoom(mapView: self.mapView)
         return lineRenderer
     }
     
