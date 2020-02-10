@@ -195,6 +195,8 @@ extension ViewController: CLLocationManagerDelegate {
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
     
+    
+    
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let lineRenderer = MKPolylineRenderer(overlay: self.route.polyline)
         lineRenderer.strokeColor = UIColor(red: 3/255, green: 115/255, blue: 140/255, alpha: 1.0)
@@ -223,7 +225,7 @@ extension ViewController:MKMapViewDelegate {
             
             self.route = response?.routes[0]
             self.mapView.addOverlay(self.route.polyline)
-            
+            self.shouldPresentLoadingView(status: false)
         }
     }
     
@@ -267,6 +269,7 @@ extension ViewController:MKMapViewDelegate {
                 
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
+                    self.shouldPresentLoadingView(status: false)
                 }
                 
             }
@@ -413,6 +416,7 @@ extension ViewController:UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == destTextFieldOutlet {
             performSearch()
+            shouldPresentLoadingView(status: true)
             view.endEditing(true)
         }
         
@@ -434,6 +438,15 @@ extension ViewController:UITextFieldDelegate {
         matchingItems = [MKMapItem]()
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            DataService.instance.REF_USERS.child(self.currentUserId!).child("tripCoordinate").removeValue()
+            self.mapView.removeOverlays(self.mapView.overlays)
+            for annotation in self.mapView.annotations {
+                if let annotation = annotation as? MKPointAnnotation {
+                    self.mapView.removeAnnotation(annotation)
+                } else if annotation.isKind(of: PassengerAnnotation.self) {
+                    self.mapView.removeAnnotation(annotation)
+                }
+            }
         }
         return true
     }
@@ -447,8 +460,9 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "locationCell")
         let mapItem = matchingItems[indexPath.row]
+        
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "locationCell")
         cell.textLabel?.text = mapItem.name
         cell.detailTextLabel?.text = mapItem.placemark.title
         return cell
@@ -456,6 +470,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.shouldPresentLoadingView(status: true)
         
         
         let passengerCoordinate = locationManager.location?.coordinate
@@ -478,6 +493,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
                     
                     self.dropPinFor(placemark: selectedMapItem.placemark)
                     self.searchMapKitForResultsWithPolyline(mapItem: selectedMapItem)
+                    
                     
                 default:
                     print("I don't know.")

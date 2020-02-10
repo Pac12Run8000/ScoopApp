@@ -21,6 +21,7 @@
 		09311C5A23B9CCFD007A5126 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09311C5823B9CCFD007A5126 /* LaunchScreen.storyboard */; };
 		0931B72023BE8CD700E95F01 /* CenterVCDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0931B71F23BE8CD700E95F01 /* CenterVCDelegate.swift */; };
 		09881F2023EC94DA00AC13D2 /* PassengerAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F1F23EC94DA00AC13D2 /* PassengerAnnotation.swift */; };
+		09881F2223F0DDFD00AC13D2 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F2123F0DDFD00AC13D2 /* UIViewControllerExt.swift */; };
 		098CE46A23CEBA9000FFBF50 /* ScoopUpUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CE46923CEBA9000FFBF50 /* ScoopUpUser.swift */; };
 		098CE46C23CF163F00FFBF50 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CE46B23CF163F00FFBF50 /* ImageService.swift */; };
 		098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEE823BBC5D90024E38B /* GradientView.swift */; };
@@ -51,6 +52,7 @@
 		09311C5B23B9CCFD007A5126 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0931B71F23BE8CD700E95F01 /* CenterVCDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterVCDelegate.swift; sourceTree = "<group>"; };
 		09881F1F23EC94DA00AC13D2 /* PassengerAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerAnnotation.swift; sourceTree = "<group>"; };
+		09881F2123F0DDFD00AC13D2 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		098CE46923CEBA9000FFBF50 /* ScoopUpUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoopUpUser.swift; sourceTree = "<group>"; };
 		098CE46B23CF163F00FFBF50 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		098FCEE823BBC5D90024E38B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				092BDC1923C2BCF60089426B /* UIViewExt.swift */,
+				09881F2123F0DDFD00AC13D2 /* UIViewControllerExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -314,6 +317,7 @@
 				098FCEF523BD19EA0024E38B /* LeftSidePanelVC.swift in Sources */,
 				09881F2023EC94DA00AC13D2 /* PassengerAnnotation.swift in Sources */,
 				098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */,
+				09881F2223F0DDFD00AC13D2 /* UIViewControllerExt.swift in Sources */,
 				09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */,
 				098CE46A23CEBA9000FFBF50 /* ScoopUpUser.swift in Sources */,
 				098FCEEF23BBF9020024E38B /* RoundedShadowView.swift in Sources */,
