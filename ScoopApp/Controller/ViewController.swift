@@ -12,7 +12,7 @@ import RevealingSplashView
 import CoreLocation
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, Alertable {
     
     
     @IBOutlet weak var actionButtonOutlet: RoundedShadowButton!
@@ -59,13 +59,28 @@ class ViewController: UIViewController {
     }
     
     @IBAction func centerButtonAction(_ sender: Any) {
+        DataService.instance.REF_USERS.observeSingleEvent(of: .value, with: { (snapshot) in
+            if let userSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
+                for user in userSnapshot {
+                    if user.key == self.currentUserId {
+                        if user.hasChild("tripCoordinate") {
+                            self.zoom(mapView: self.mapView)
+                            self.centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+                        } else {
+                            if let location = self.locationManager.location?.coordinate {
+                                let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
+                                let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+                                self.mapView.setRegion(region, animated: true)
+                                self.centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+                            }
+                        }
+                    }
+                }
+            }
+        })
         
-        if let location = locationManager.location?.coordinate {
-            let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
-            let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
-            mapView.setRegion(region, animated: true)
-            centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
-        }
+        
+        
         
         
     }
@@ -194,6 +209,12 @@ extension ViewController: CLLocationManagerDelegate {
 }
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
+    
+    func removeRoutesFromMap() {
+        DispatchQueue.main.async {
+            self.mapView.removeOverlays(self.mapView.overlays)
+        }
+    }
     
     func zoom(mapView:MKMapView) {
         guard mapView.annotations.count != 0 else {
@@ -441,6 +462,12 @@ extension ViewController:UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == destTextFieldOutlet {
+            guard !destTextFieldOutlet.text!.isEmpty || destTextFieldOutlet.text != "" else {
+                showAlert("User error", "Enter search criterion into the destination text field.")
+                self.destTextFieldOutlet.becomeFirstResponder()
+                return false
+            }
+            
             performSearch()
             shouldPresentLoadingView(status: true)
             view.endEditing(true)
@@ -465,7 +492,9 @@ extension ViewController:UITextFieldDelegate {
         DispatchQueue.main.async {
             self.tableView.reloadData()
             DataService.instance.REF_USERS.child(self.currentUserId!).child("tripCoordinate").removeValue()
-            self.mapView.removeOverlays(self.mapView.overlays)
+            
+            self.removeRoutesFromMap()
+            
             for annotation in self.mapView.annotations {
                 if let annotation = annotation as? MKPointAnnotation {
                     self.mapView.removeAnnotation(annotation)
@@ -498,6 +527,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.shouldPresentLoadingView(status: true)
         
+        removeRoutesFromMap()
         
         let passengerCoordinate = locationManager.location?.coordinate
         
