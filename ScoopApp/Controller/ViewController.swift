@@ -44,13 +44,43 @@ class ViewController: UIViewController, Alertable {
             self.loadDriverAnnotationsFromFB()
         })
        
+        UpdateService.instance.observeTrips { (tripDict) in
+            
+            if let tripDict = tripDict {
+                let pickUpCoordinateArray = tripDict["pickUpCoordinate"] as! NSArray
+                let tripKey = tripDict["passengerKey"] as! String
+                let acceptanceStatus = tripDict["tripAccepted"] as! Bool
+                
+                if acceptanceStatus == false {
+                    DataService.instance.driverIsAvailable(key: self.currentUserId!) { (available) in
+                        if let available = available {
+                            if available == true {
+                                let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+                                let pickUpVC = storyboard.instantiateViewController(identifier: "PickUpVC") as? PickUpVC
+                                pickUpVC?.initData(coordinate: CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees), passengerKey: tripKey)
+                                self.present(pickUpVC!, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+        
        
     }
     
     
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
-        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+        UpdateService.instance.updateTripsWithCoordinatesUponRequest()
+//        UpdateService.instance.updateTripsWithCoordinatesUponRequest()
+//        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+//        
+//        self.view.endEditing(true)
+//        destTextFieldOutlet.isUserInteractionEnabled = false
+    
         
     }
     
@@ -78,12 +108,9 @@ class ViewController: UIViewController, Alertable {
                 }
             }
         })
-        
-        
-        
-        
-        
     }
+    
+    
     
 }
 

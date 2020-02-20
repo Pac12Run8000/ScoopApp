@@ -23,6 +23,8 @@
 		09881F2023EC94DA00AC13D2 /* PassengerAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F1F23EC94DA00AC13D2 /* PassengerAnnotation.swift */; };
 		09881F2223F0DDFD00AC13D2 /* UIViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F2123F0DDFD00AC13D2 /* UIViewControllerExt.swift */; };
 		09881F2423F230E800AC13D2 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F2323F230E800AC13D2 /* Alertable.swift */; };
+		09881F2623F49B7B00AC13D2 /* PickUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F2523F49B7B00AC13D2 /* PickUpVC.swift */; };
+		09881F2823F4BE7700AC13D2 /* RoundMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09881F2723F4BE7700AC13D2 /* RoundMapView.swift */; };
 		098CE46A23CEBA9000FFBF50 /* ScoopUpUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CE46923CEBA9000FFBF50 /* ScoopUpUser.swift */; };
 		098CE46C23CF163F00FFBF50 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098CE46B23CF163F00FFBF50 /* ImageService.swift */; };
 		098FCEE923BBC5D90024E38B /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098FCEE823BBC5D90024E38B /* GradientView.swift */; };
@@ -55,6 +57,8 @@
 		09881F1F23EC94DA00AC13D2 /* PassengerAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassengerAnnotation.swift; sourceTree = "<group>"; };
 		09881F2123F0DDFD00AC13D2 /* UIViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExt.swift; sourceTree = "<group>"; };
 		09881F2323F230E800AC13D2 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		09881F2523F49B7B00AC13D2 /* PickUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpVC.swift; sourceTree = "<group>"; };
+		09881F2723F4BE7700AC13D2 /* RoundMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundMapView.swift; sourceTree = "<group>"; };
 		098CE46923CEBA9000FFBF50 /* ScoopUpUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoopUpUser.swift; sourceTree = "<group>"; };
 		098CE46B23CF163F00FFBF50 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		098FCEE823BBC5D90024E38B /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -155,6 +159,7 @@
 				098FCEF423BD19EA0024E38B /* LeftSidePanelVC.swift */,
 				098FCEF623BD23E30024E38B /* ContainerVC.swift */,
 				092BDC1B23C411BE0089426B /* LoginVC.swift */,
+				09881F2523F49B7B00AC13D2 /* PickUpVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 				092BDC1D23C426C30089426B /* RoundedCornerTextField.swift */,
 				09F6F16023E1FD5000040588 /* DriverAnnotation.swift */,
 				09881F1F23EC94DA00AC13D2 /* PassengerAnnotation.swift */,
+				09881F2723F4BE7700AC13D2 /* RoundMapView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -321,8 +327,10 @@
 				09881F2023EC94DA00AC13D2 /* PassengerAnnotation.swift in Sources */,
 				098FCEEB23BBF69E0024E38B /* RoundImageView.swift in Sources */,
 				09881F2223F0DDFD00AC13D2 /* UIViewControllerExt.swift in Sources */,
+				09881F2823F4BE7700AC13D2 /* RoundMapView.swift in Sources */,
 				09311C5223B9CCFC007A5126 /* ViewController.swift in Sources */,
 				098CE46A23CEBA9000FFBF50 /* ScoopUpUser.swift in Sources */,
+				09881F2623F49B7B00AC13D2 /* PickUpVC.swift in Sources */,
 				09881F2423F230E800AC13D2 /* Alertable.swift in Sources */,
 				098FCEEF23BBF9020024E38B /* RoundedShadowView.swift in Sources */,
 				0931B72023BE8CD700E95F01 /* CenterVCDelegate.swift in Sources */,
