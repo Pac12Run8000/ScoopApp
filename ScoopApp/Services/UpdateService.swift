@@ -49,7 +49,6 @@ class UpdateService {
                             if driver.key == uid {
                                
                                 if driver.childSnapshot(forPath: "isPickUpModeEnabled").value as? Bool == true {
-//                                    print("Driver:\(driver.key)")
                                     DataService.instance.REF_DRIVERS.child(driver.key).updateChildValues(["coordinate":[coordinate.latitude, coordinate.longitude]])
                                 }
                             }
@@ -95,33 +94,18 @@ class UpdateService {
             }
         })
         
-        
-//        DataService.instance.REF_TRIPS.observe(.value, with: { (snapshot) in
-//            if let tripSnapshot = snapshot.children.allObjects as? [DataSnapshot] {
-//                for trip in tripSnapshot {
-//                    if trip.hasChild("passengerKey") && trip.hasChild("tripAccepted") {
-//                        if let tripDict = trip.value as? Dictionary<String, AnyObject> {
-//                            handler(tripDict)
-//                        } else {
-//                            handler(nil)
-//                        }
-//                    }
-//                }
-//            }
-//        })
     }
     
     func acceptTrip(passengerKey:String, driverKey:String) {
         DataService.instance.REF_TRIPS.child(passengerKey).updateChildValues(["driverKey":driverKey,"tripAccepted":true])
-            print("passenger:", passengerKey,"driver:",driverKey)
             DataService.instance.REF_DRIVERS.child(driverKey).updateChildValues(["driverIsOnTrip":true])
         
     }
     
     func cancelTrip(passengerKey:String, driverKey:String) {
-        DataService.instance.REF_TRIPS.child(passengerKey)
+        DataService.instance.REF_TRIPS.child(passengerKey).removeValue()
         DataService.instance.REF_USERS.child(passengerKey).child("tripCoordinate").removeValue()
-        DataService.instance.REF_DRIVERS.child(driverKey).updateChildValues(["driverIsOnTrip":false])
+        DataService.instance.REF_DRIVERS.child(driverKey).updateChildValues(["driverIsOnTrip":true])
     }
     
 }

@@ -35,7 +35,7 @@ class PickUpVC: UIViewController {
         dropPinForPlaceMark(placeMark: locationPlaceMark)
         centerMapOnLocation(location: locationPlaceMark.location!)
         
-        DataService.instance.REF_TRIPS.observe(.value, with: { (tripSnapshot) in
+        DataService.instance.REF_TRIPS.child(passengerKey).observe(.value, with: { (tripSnapshot) in
             if tripSnapshot.exists() {
                 if tripSnapshot.childSnapshot(forPath: "tripAccepted").value as? Bool == true {
                     self.dismiss(animated: true, completion: nil)
@@ -44,6 +44,16 @@ class PickUpVC: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         })
+        
+//        DataService.instance.REF_TRIPS.observe(.value, with: { (tripSnapshot) in
+//            if tripSnapshot.exists() {
+//                if tripSnapshot.childSnapshot(forPath: "tripAccepted").value as? Bool == true {
+//                    self.dismiss(animated: true, completion: nil)
+//                }
+//            } else {
+//                self.dismiss(animated: true, completion: nil)
+//            }
+//        })
        
     }
     

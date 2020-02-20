@@ -75,11 +75,11 @@ class ViewController: UIViewController, Alertable {
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
         UpdateService.instance.updateTripsWithCoordinatesUponRequest()
-//        UpdateService.instance.updateTripsWithCoordinatesUponRequest()
-//        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
-//        
-//        self.view.endEditing(true)
-//        destTextFieldOutlet.isUserInteractionEnabled = false
+
+        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+        
+        self.view.endEditing(true)
+        destTextFieldOutlet.isUserInteractionEnabled = false
     
         
     }
