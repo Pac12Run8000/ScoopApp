@@ -68,6 +68,9 @@ class ViewController: UIViewController, Alertable {
             
         }
         
+        DataService.instance.userIsOnTrip(passengerKey: "0PP03ZwEb8RLH4v9GETjtKfyQqg1", handler: { (status, driverKey, tripKey) in
+            print("status:\(status), driverKey:\(driverKey), tripKey:\(tripKey)")
+        })
        
     }
     

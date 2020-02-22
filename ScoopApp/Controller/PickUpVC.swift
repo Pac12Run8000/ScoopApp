@@ -45,15 +45,7 @@ class PickUpVC: UIViewController {
             }
         })
         
-//        DataService.instance.REF_TRIPS.observe(.value, with: { (tripSnapshot) in
-//            if tripSnapshot.exists() {
-//                if tripSnapshot.childSnapshot(forPath: "tripAccepted").value as? Bool == true {
-//                    self.dismiss(animated: true, completion: nil)
-//                }
-//            } else {
-//                self.dismiss(animated: true, completion: nil)
-//            }
-//        })
+
        
     }
     

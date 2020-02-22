@@ -60,7 +60,60 @@ class DataService {
                 }
             }
         })
-        
-
     }
+    
+    func driverIsOnTrip(key:String, handler:@escaping(_ status:Bool?,_ driverkey:String?,_ tripKey:String?) -> ()) {
+        DataService.instance.REF_DRIVERS.child(key).child("driverIsOnTrip").observe(.value, with: { (driverTripStatusSnapshot) in
+            
+            if let driverTripStatusSnapshot = driverTripStatusSnapshot.value as? Bool, driverTripStatusSnapshot == true {
+                DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with:  { (tripSnapshot) in
+                    if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
+                        for trip in tripSnapshot {
+                            if trip.childSnapshot(forPath: "driverKey").value as? String == key {
+                                handler(true, key, trip.key)
+                            } else {
+                                return
+                            }
+                        }
+                    }
+                })
+            } else {
+                handler(false, nil, nil)
+            }
+            
+        })
+    }
+    
+    func userIsOnTrip(passengerKey:String, handler:@escaping(_ status:Bool?, _ driverKey:String?, _ tripKey:String?) -> ()) {
+        
+        DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with: { (tripSnapshot) in
+            if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
+                for trip in tripSnapshot {
+                    if trip.key == passengerKey {
+                        if trip.childSnapshot(forPath: "tripAccepted").value as? Bool == true {
+                            let driverKey = trip.childSnapshot(forPath: "driverKey").value as? String
+                            handler(true, driverKey, trip.key)
+                        } else {
+                            handler(false, nil, nil)
+                        }
+                        
+                    }
+                }
+//                for trip in tripSnapshot {
+//                    if trip.key == passengerKey {
+//
+//                        if trip.childSnapshot(forPath: "tripAccepted").value as? Bool == true {
+//                            let driverKey = trip.childSnapshot(forPath: "driverKey") as? String
+//                            handler(true, driverKey, trip.key)
+//                        }
+//
+//                    } else {
+//                        handler(false, nil, nil)
+//                    }
+//                }
+            }
+        })
+        
+    }
+    
 }
