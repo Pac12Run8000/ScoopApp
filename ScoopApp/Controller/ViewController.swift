@@ -68,10 +68,32 @@ class ViewController: UIViewController, Alertable {
             
         }
         
-        DataService.instance.userIsOnTrip(passengerKey: "0PP03ZwEb8RLH4v9GETjtKfyQqg1", handler: { (status, driverKey, tripKey) in
-            print("status:\(status), driverKey:\(driverKey), tripKey:\(tripKey)")
-        })
+        
        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        DataService.instance.driverIsAvailable(key: self.currentUserId!, handler: { (status) in
+            if !status! {
+                DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with: { (tripSnapshot) in
+                    if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
+                        for trip in tripSnapshot {
+                            if trip.childSnapshot(forPath: "driverKey").value as? String == self.currentUserId {
+                                let pickUpCoordinateArray = trip.childSnapshot(forPath: "pickUpCoordinate").value as! NSArray
+                                let pickUpCoordinate = CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees)
+                                
+                                let pickUpPlaceMark = MKPlacemark(coordinate: pickUpCoordinate)
+                                self.dropPinFor(placemark: pickUpPlaceMark)
+                                self.searchMapKitForResultsWithPolyline(mapItem: MKMapItem(placemark: pickUpPlaceMark))
+                            }
+                        }
+                    }
+                })
+            }
+        })
     }
     
     
@@ -278,6 +300,8 @@ extension ViewController:MKMapViewDelegate {
         lineRenderer.lineWidth = 3
         lineRenderer.lineJoin = .round
         lineRenderer.lineCap = .butt
+        
+        shouldPresentLoadingView(status: false)
         
         zoom(mapView: self.mapView)
         return lineRenderer

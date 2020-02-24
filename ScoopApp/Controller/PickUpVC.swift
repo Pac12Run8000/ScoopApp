@@ -55,7 +55,9 @@ class PickUpVC: UIViewController {
     
     @IBAction func acceptTripButtonPressed(_ sender: Any) {
         UpdateService.instance.acceptTrip(passengerKey: passengerKey, driverKey: currentUserId!)
-        presentingViewController?.shouldPresentLoadingView(status: true)
+        
+        let delegate = AppDelegate.getAppDelegate()
+        delegate.window?.rootViewController?.shouldPresentLoadingView(status: true)
     }
     
     func initData(coordinate:CLLocationCoordinate2D, passengerKey:String) {

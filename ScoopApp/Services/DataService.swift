@@ -55,7 +55,7 @@ class DataService {
                             } else {
                                 handler(true)
                             }
-                        }
+                        } 
                     }
                 }
             }
@@ -84,7 +84,7 @@ class DataService {
         })
     }
     
-    func userIsOnTrip(passengerKey:String, handler:@escaping(_ status:Bool?, _ driverKey:String?, _ tripKey:String?) -> ()) {
+    func passengerIsOnTrip(passengerKey:String, handler:@escaping(_ status:Bool?, _ driverKey:String?, _ tripKey:String?) -> ()) {
         
         DataService.instance.REF_TRIPS.observeSingleEvent(of: .value, with: { (tripSnapshot) in
             if let tripSnapshot = tripSnapshot.children.allObjects as? [DataSnapshot] {
@@ -99,21 +99,32 @@ class DataService {
                         
                     }
                 }
-//                for trip in tripSnapshot {
-//                    if trip.key == passengerKey {
-//
-//                        if trip.childSnapshot(forPath: "tripAccepted").value as? Bool == true {
-//                            let driverKey = trip.childSnapshot(forPath: "driverKey") as? String
-//                            handler(true, driverKey, trip.key)
-//                        }
-//
-//                    } else {
-//                        handler(false, nil, nil)
-//                    }
-//                }
+
             }
         })
         
+    }
+    
+    func userIsDriver(userKey:String, handler:@escaping(_ status:Bool) -> ()) {
+        var isDriver:[Int] = [Int]()
+        DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (driverSnapshot) in
+            if let driverSnapshot = driverSnapshot.children.allObjects as? [DataSnapshot] {
+                for driver in driverSnapshot {
+                    if driver.key == userKey  {
+                        isDriver.append(1)
+                    } else {
+                        isDriver.append(0)
+                    }
+                }
+                let isDriverArray = isDriver.filter({ ($0 > 0) })
+                if isDriverArray.count > 0 {
+                    handler(true)
+                } else {
+                    handler(false)
+                }
+                
+            }
+        })
     }
     
 }
