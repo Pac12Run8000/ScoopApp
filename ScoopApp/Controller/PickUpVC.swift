@@ -16,6 +16,7 @@ class PickUpVC: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapViewHeightConstraint: NSLayoutConstraint!
     
+    weak var pickupVCDelegate:PickupVCDelegate?
     
     var regionRadius:CLLocationDistance = 2000
     var pin:MKPlacemark? = nil
@@ -50,14 +51,23 @@ class PickUpVC: UIViewController {
     }
     
     @IBAction func cancelButtonActionPressed(_ sender: Any) {
+        pickupVCDelegate?.pickupViewController(controller: self, itemForPolyline: nil)
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptTripButtonPressed(_ sender: Any) {
         UpdateService.instance.acceptTrip(passengerKey: passengerKey, driverKey: currentUserId!)
         
-        let delegate = AppDelegate.getAppDelegate()
-        delegate.window?.rootViewController?.shouldPresentLoadingView(status: true)
+        guard let pickupCoordinate = pickupCoordinate, let pickUpPlaceMark = MKPlacemark(coordinate: pickupCoordinate) as? MKPlacemark, let mapItem = MKMapItem(placemark: pickUpPlaceMark) as? MKMapItem  else {
+            print("There is no pickup coordinate.")
+            return
+        }
+        
+        pickupVCDelegate?.pickupViewController(controller: self, itemForPolyline: mapItem)
+        dismiss(animated: true, completion: nil)
+        
+//        let delegate = AppDelegate.getAppDelegate()
+//        delegate.window?.rootViewController?.shouldPresentLoadingView(status: true)
     }
     
     func initData(coordinate:CLLocationCoordinate2D, passengerKey:String) {

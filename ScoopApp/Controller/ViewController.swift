@@ -58,6 +58,8 @@ class ViewController: UIViewController, Alertable {
                                 let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
                                 let pickUpVC = storyboard.instantiateViewController(identifier: "PickUpVC") as? PickUpVC
                                 pickUpVC?.initData(coordinate: CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees), passengerKey: tripKey)
+                                
+                                pickUpVC?.pickupVCDelegate = self
                                 self.present(pickUpVC!, animated: true, completion: nil)
                             }
                         }
@@ -138,6 +140,18 @@ class ViewController: UIViewController, Alertable {
     
     
 }
+
+// MARK:- The PickUpVCDelegate functionality
+extension ViewController:PickupVCDelegate {
+    
+    func pickupViewController(controller: PickUpVC, itemForPolyline item: MKMapItem?) {
+        self.shouldPresentLoadingView(status: true)
+        self.searchMapKitForResultsWithPolyline(mapItem: item!)
+    }
+    
+    
+}
+
 
 // MARK:- This is where the locationmanger functionality is located
 extension ViewController: CLLocationManagerDelegate {
@@ -600,7 +614,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
                 case "Passenger":
                     print("Passenger")
                     DataService.instance.REF_USERS.child(self.currentUserId!).updateChildValues(["tripCoordinate":[selectedMapItem.placemark.coordinate.latitude, selectedMapItem.placemark.coordinate.longitude]])
-                    
+                     print("Take Off")
                     self.dropPinFor(placemark: selectedMapItem.placemark)
                     self.searchMapKitForResultsWithPolyline(mapItem: selectedMapItem)
                     
