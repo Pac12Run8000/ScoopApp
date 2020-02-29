@@ -52,7 +52,6 @@ class PickUpVC: UIViewController {
     
     @IBAction func cancelButtonActionPressed(_ sender: Any) {
         pickupVCDelegate?.pickupViewController(controller: self, itemForPolyline: nil)
-        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptTripButtonPressed(_ sender: Any) {
@@ -64,7 +63,6 @@ class PickUpVC: UIViewController {
         }
         
         pickupVCDelegate?.pickupViewController(controller: self, itemForPolyline: mapItem)
-        dismiss(animated: true, completion: nil)
         
 //        let delegate = AppDelegate.getAppDelegate()
 //        delegate.window?.rootViewController?.shouldPresentLoadingView(status: true)

@@ -147,6 +147,7 @@ extension ViewController:PickupVCDelegate {
     func pickupViewController(controller: PickUpVC, itemForPolyline item: MKMapItem?) {
         self.shouldPresentLoadingView(status: true)
         self.searchMapKitForResultsWithPolyline(mapItem: item!)
+        controller.dismiss(animated: true, completion: nil)
     }
     
     
@@ -290,10 +291,11 @@ extension ViewController:MKMapViewDelegate {
         
         var topLeftCoordinate = CLLocationCoordinate2D(latitude: -90, longitude: 180)
         var bottomRightCoordinate = CLLocationCoordinate2D(latitude: 90, longitude: -180)
+        
         for annotation in mapView.annotations where !annotation.isKind(of: DriverAnnotation.self) {
             
             
-            
+        
             topLeftCoordinate.longitude = fmin(topLeftCoordinate.longitude, annotation.coordinate.longitude)
             topLeftCoordinate.latitude = fmax(topLeftCoordinate.latitude, annotation.coordinate.latitude)
             bottomRightCoordinate.longitude = fmax(bottomRightCoordinate.longitude, annotation.coordinate.longitude)
