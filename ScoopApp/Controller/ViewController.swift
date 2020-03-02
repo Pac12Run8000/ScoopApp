@@ -110,7 +110,7 @@ class ViewController: UIViewController, Alertable {
             if status! {
                 UpdateService.instance.cancelTrip(passengerKey: self.currentUserId!, driverKey: driverKey!)
             } else {
-                UpdateService.instance.cancelTrip(passengerKey: self.currentUserId!, driverKey: driverKey!)
+                UpdateService.instance.cancelTrip(passengerKey: self.currentUserId!, driverKey: nil)
             }
         })
     }
