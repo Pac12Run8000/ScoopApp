@@ -164,6 +164,20 @@
                                     <constraint firstItem="t5G-Ld-geq" firstAttribute="trailing" secondItem="ygw-aF-WCi" secondAttribute="trailingMargin" id="qa0-DP-mgM"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXf-kf-Gfr">
+                                <rect key="frame" x="110" y="673" width="194" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="194" id="P5h-6E-KCc"/>
+                                    <constraint firstAttribute="height" constant="30" id="TcX-MN-jpY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="21"/>
+                                <state key="normal" title="CANCEL TRIP">
+                                    <color key="titleColor" red="0.0078431372550000003" green="0.32549019610000002" blue="0.45098039220000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1bq-vQ-OO0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -173,9 +187,11 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eeR-G7-wcS" secondAttribute="trailing" id="JXR-rJ-UfJ"/>
                             <constraint firstItem="ygw-aF-WCi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="Nb0-ac-7td"/>
                             <constraint firstItem="fdM-Mw-dd8" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Nzn-B6-ifA"/>
+                            <constraint firstItem="fdM-Mw-dd8" firstAttribute="top" secondItem="qXf-kf-Gfr" secondAttribute="bottom" constant="15" id="TnW-NB-Put"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Sdc-Gx-pOP" secondAttribute="trailing" constant="20" id="VhL-m3-q7P"/>
                             <constraint firstItem="eeR-G7-wcS" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Z1m-cT-IjW"/>
                             <constraint firstItem="eeR-G7-wcS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZAh-mT-mqO"/>
+                            <constraint firstItem="qXf-kf-Gfr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cmB-TO-uuR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hIK-Px-yFg" secondAttribute="trailing" id="ea4-eG-R9J"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Sdc-Gx-pOP" secondAttribute="bottom" constant="78" id="gBh-2c-JVZ"/>
                             <constraint firstItem="ygw-aF-WCi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="i3v-Ns-Bu1"/>
@@ -189,6 +205,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="actionButtonOutlet" destination="Fte-iK-wJA" id="7rq-e5-Efa"/>
+                        <outlet property="cancelButtonOutlet" destination="qXf-kf-Gfr" id="Hah-MP-MRb"/>
                         <outlet property="centerMapButtonOutlet" destination="Sdc-Gx-pOP" id="F4c-yG-SG5"/>
                         <outlet property="destTextFieldOutlet" destination="oxd-CA-Edx" id="WvV-OU-qQG"/>
                         <outlet property="destinationCircleOutlet" destination="X58-dN-s9R" id="YGs-Wl-AYq"/>

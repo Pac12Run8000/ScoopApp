@@ -20,6 +20,8 @@ class ViewController: UIViewController, Alertable {
     @IBOutlet weak var centerMapButtonOutlet: UIButton!
     @IBOutlet weak var destTextFieldOutlet: UITextField!
     @IBOutlet weak var destinationCircleOutlet: CircleView!
+    @IBOutlet weak var cancelButtonOutlet: UIButton!
+    
     
     var delegate:CenterVCDelegate?
     let locationManager = CLLocationManager()
@@ -98,6 +100,20 @@ class ViewController: UIViewController, Alertable {
         })
     }
     
+    @IBAction func cancelButtonAction(_ sender: Any) {
+        DataService.instance.driverIsOnTrip(key: self.currentUserId!, handler: { (status, driverKey, tripKey) in
+            if status! {
+                UpdateService.instance.cancelTrip(passengerKey: tripKey!, driverKey: driverKey!)
+            }
+        })
+        DataService.instance.passengerIsOnTrip(passengerKey: self.currentUserId!, handler: { (status, driverKey, tripKey) in
+            if status! {
+                UpdateService.instance.cancelTrip(passengerKey: self.currentUserId!, driverKey: driverKey!)
+            } else {
+                UpdateService.instance.cancelTrip(passengerKey: self.currentUserId!, driverKey: driverKey!)
+            }
+        })
+    }
     
 
     @IBAction func actionButtonWasPressed(_ sender: Any) {
