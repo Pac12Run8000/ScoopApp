@@ -111,7 +111,7 @@ class ViewController: UIViewController, Alertable {
                 if isDriver {
                     // Remove overlays and annotations
                 } else {
-                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+//                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
 //                    self.actionButtonOutlet.animateButton(shouldLoad: false, with: "REQUEST RIDE")
 //                    self.actionButtonOutlet.setTitleColor(UIColor(red: 121/255, green: 140/255, blue: 140/255, alpha: 1.0), for: .normal)
                     self.requestRideButtonLayout(r: 255, g: 255, b: 255, text: "REQUEST RIDE")
@@ -152,7 +152,9 @@ class ViewController: UIViewController, Alertable {
 
 //        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
 //        self.actionButtonOutlet.setTitleColor(.red, for: .normal)
-        self.requestRideButtonLayout(r: 255, g: 32, b: 68, text: "RIDE REQUESTED")
+        
+        self.requestRideButtonLayout(r: 255, g: 32, b: 68, text: "PLEASE WAIT.")
+        
         
         self.view.endEditing(true)
         destTextFieldOutlet.isUserInteractionEnabled = false
@@ -193,6 +195,9 @@ class ViewController: UIViewController, Alertable {
 
 // MARK:- UILayout for Views
 extension ViewController {
+    
+    
+    
     
     
     func requestRideButtonLayout(r:CGFloat, g:CGFloat, b:CGFloat, text:String) {
