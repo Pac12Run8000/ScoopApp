@@ -110,13 +110,15 @@ class ViewController: UIViewController, Alertable {
             DataService.instance.userIsDriver(userKey: self.currentUserId!, handler: { (isDriver) in
                 if isDriver {
                     // Remove overlays and annotations
+                    self.removeOverlaysAndAnnotations(forDriver: false, forPassengers: true)
                 } else {
                     self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
 
                     self.requestRideButtonLayout(r: 255, g: 255, b: 255, text: "REQUEST RIDE")
                     self.destTextFieldOutlet.isUserInteractionEnabled = true
                     self.destTextFieldOutlet.text = ""
-                
+                    
+                    self.removeOverlaysAndAnnotations(forDriver: false, forPassengers: true)
                     self.centerMapOnUserLocation()
                     
                 }
@@ -337,6 +339,34 @@ extension ViewController: CLLocationManagerDelegate {
 }
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
+    
+    func removeOverlaysAndAnnotations(forDriver:Bool?, forPassengers:Bool?) {
+        for annotation in mapView.annotations {
+            if let annotation = annotation as? MKPointAnnotation {
+                self.mapView.removeAnnotation(annotation)
+            }
+            
+            if let _ = forPassengers {
+                if let annotation = annotation as? PassengerAnnotation {
+                    mapView.removeAnnotation(annotation)
+                }
+            }
+            
+            if let _ = forDriver {
+                if let annotation = annotation as? DriverAnnotation {
+                    mapView.removeAnnotation(annotation)
+                }
+            }
+            
+            for overlay in mapView.overlays {
+                if overlay is MKPolyline {
+                    mapView.removeOverlay(overlay)
+                }
+            }
+        }
+        
+       
+    }
     
     func centerMapOnUserLocation() {
         if let location = self.locationManager.location?.coordinate {
