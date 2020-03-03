@@ -111,9 +111,8 @@ class ViewController: UIViewController, Alertable {
                 if isDriver {
                     // Remove overlays and annotations
                 } else {
-//                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
-//                    self.actionButtonOutlet.animateButton(shouldLoad: false, with: "REQUEST RIDE")
-//                    self.actionButtonOutlet.setTitleColor(UIColor(red: 121/255, green: 140/255, blue: 140/255, alpha: 1.0), for: .normal)
+                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+
                     self.requestRideButtonLayout(r: 255, g: 255, b: 255, text: "REQUEST RIDE")
                     self.destTextFieldOutlet.isUserInteractionEnabled = true
                     self.destTextFieldOutlet.text = ""
@@ -150,9 +149,7 @@ class ViewController: UIViewController, Alertable {
     @IBAction func actionButtonWasPressed(_ sender: Any) {
         UpdateService.instance.updateTripsWithCoordinatesUponRequest()
 
-//        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
-//        self.actionButtonOutlet.setTitleColor(.red, for: .normal)
-        
+
         self.requestRideButtonLayout(r: 255, g: 32, b: 68, text: "PLEASE WAIT.")
         
         
@@ -175,12 +172,8 @@ class ViewController: UIViewController, Alertable {
                             self.zoom(mapView: self.mapView)
                             self.centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
                         } else {
-                            if let location = self.locationManager.location?.coordinate {
-                                let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
-                                let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
-                                self.mapView.setRegion(region, animated: true)
-                                self.centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
-                            }
+                            self.centerMapOnUserLocation()
+                            self.centerMapButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
                         }
                     }
                 }
@@ -351,6 +344,7 @@ extension ViewController:MKMapViewDelegate {
             let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
             self.mapView.setRegion(region, animated: true)
         }
+        
     }
     
     func removeRoutesFromMap() {
