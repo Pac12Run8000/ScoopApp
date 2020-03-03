@@ -98,7 +98,38 @@ class ViewController: UIViewController, Alertable {
                 })
             }
         })
+        
+        DataService.instance.REF_TRIPS.observe(.childRemoved, with: { (removedTripSnapshot) in
+            
+            let removedTripDict = removedTripSnapshot.value as? [String:AnyObject]
+            
+            if let removedDriverKey = removedTripDict!["driverKey"] as? String {
+                DataService.instance.REF_DRIVERS.child(removedDriverKey).updateChildValues(["driverIsOnTrip": false])
+            }
+            
+            DataService.instance.userIsDriver(userKey: self.currentUserId!, handler: { (isDriver) in
+                if isDriver {
+                    // Remove overlays and annotations
+                } else {
+                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+//                    self.actionButtonOutlet.animateButton(shouldLoad: false, with: "REQUEST RIDE")
+//                    self.actionButtonOutlet.setTitleColor(UIColor(red: 121/255, green: 140/255, blue: 140/255, alpha: 1.0), for: .normal)
+                    self.requestRideButtonLayout(r: 255, g: 255, b: 255, text: "REQUEST RIDE")
+                    self.destTextFieldOutlet.isUserInteractionEnabled = true
+                    self.destTextFieldOutlet.text = ""
+                
+                    self.centerMapOnUserLocation()
+                    
+                }
+            })
+            
+        })
+        
+        
     }
+    
+    
+    
     
     @IBAction func cancelButtonAction(_ sender: Any) {
         DataService.instance.driverIsOnTrip(key: self.currentUserId!, handler: { (status, driverKey, tripKey) in
@@ -119,7 +150,9 @@ class ViewController: UIViewController, Alertable {
     @IBAction func actionButtonWasPressed(_ sender: Any) {
         UpdateService.instance.updateTripsWithCoordinatesUponRequest()
 
-        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+//        actionButtonOutlet.animateButton(shouldLoad: true, with: nil)
+//        self.actionButtonOutlet.setTitleColor(.red, for: .normal)
+        self.requestRideButtonLayout(r: 255, g: 32, b: 68, text: "RIDE REQUESTED")
         
         self.view.endEditing(true)
         destTextFieldOutlet.isUserInteractionEnabled = false
@@ -156,6 +189,20 @@ class ViewController: UIViewController, Alertable {
     
     
 }
+
+
+// MARK:- UILayout for Views
+extension ViewController {
+    
+    
+    func requestRideButtonLayout(r:CGFloat, g:CGFloat, b:CGFloat, text:String) {
+        self.actionButtonOutlet.setTitleColor(UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0), for: .normal)
+        self.actionButtonOutlet.setTitle(text, for: .normal)
+    }
+    
+}
+
+
 
 // MARK:- The PickUpVCDelegate functionality
 extension ViewController:PickupVCDelegate {
@@ -292,6 +339,14 @@ extension ViewController: CLLocationManagerDelegate {
 }
 // MARK:- Mapview delegate functionality
 extension ViewController:MKMapViewDelegate {
+    
+    func centerMapOnUserLocation() {
+        if let location = self.locationManager.location?.coordinate {
+            let span:MKCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.10, longitudeDelta: 0.10)
+            let region:MKCoordinateRegion = MKCoordinateRegion(center: location, span: span)
+            self.mapView.setRegion(region, animated: true)
+        }
+    }
     
     func removeRoutesFromMap() {
         DispatchQueue.main.async {
