@@ -91,7 +91,7 @@ class ViewController: UIViewController, Alertable {
                                 
                                 let pickUpPlaceMark = MKPlacemark(coordinate: pickUpCoordinate)
                                 self.dropPinFor(placemark: pickUpPlaceMark)
-                                self.searchMapKitForResultsWithPolyline(mapItem: MKMapItem(placemark: pickUpPlaceMark))
+                                self.searchMapKitForResultsWithPolyline(originMapItem: nil, destinationMapItem: MKMapItem(placemark: pickUpPlaceMark))
                             }
                         }
                     }
@@ -112,7 +112,7 @@ class ViewController: UIViewController, Alertable {
                     // Remove overlays and annotations
                     self.removeOverlaysAndAnnotations(forDriver: false, forPassengers: true)
                 } else {
-                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
+//                    self.cancelButtonOutlet.fadeTo(alphaValue: 0.0, withDuration: 0.2)
 
                     self.requestRideButtonLayout(r: 255, g: 255, b: 255, text: "REQUEST RIDE")
                     self.destTextFieldOutlet.isUserInteractionEnabled = true
@@ -157,7 +157,7 @@ class ViewController: UIViewController, Alertable {
         
         self.view.endEditing(true)
         destTextFieldOutlet.isUserInteractionEnabled = false
-    
+//        self.cancelButtonOutlet.fadeTo(alphaValue: 1.0, withDuration: 0.2)
         
     }
     
@@ -209,7 +209,7 @@ extension ViewController:PickupVCDelegate {
     
     func pickupViewController(controller: PickUpVC, itemForPolyline item: MKMapItem?) {
         self.shouldPresentLoadingView(status: true)
-        self.searchMapKitForResultsWithPolyline(mapItem: item!)
+        self.searchMapKitForResultsWithPolyline(originMapItem: nil, destinationMapItem: item!)
         controller.dismiss(animated: true, completion: nil)
     }
     
@@ -423,10 +423,14 @@ extension ViewController:MKMapViewDelegate {
         return lineRenderer
     }
     
-    func searchMapKitForResultsWithPolyline(mapItem:MKMapItem) {
+    func searchMapKitForResultsWithPolyline(originMapItem:MKMapItem?, destinationMapItem:MKMapItem) {
         let request = MKDirections.Request()
-        request.source = MKMapItem.forCurrentLocation()
-        request.destination = mapItem
+        if let originMapItem = originMapItem {
+            request.source = originMapItem
+        } else {
+            request.source = MKMapItem.forCurrentLocation()
+        }
+        request.destination = destinationMapItem
         request.transportType = .automobile
         
         let directions = MKDirections(request: request)
@@ -718,7 +722,7 @@ extension ViewController:UITableViewDelegate, UITableViewDataSource {
                     DataService.instance.REF_USERS.child(self.currentUserId!).updateChildValues(["tripCoordinate":[selectedMapItem.placemark.coordinate.latitude, selectedMapItem.placemark.coordinate.longitude]])
                      print("Take Off")
                     self.dropPinFor(placemark: selectedMapItem.placemark)
-                    self.searchMapKitForResultsWithPolyline(mapItem: selectedMapItem)
+                    self.searchMapKitForResultsWithPolyline(originMapItem: nil, destinationMapItem: selectedMapItem)
                     
                     
                 default:
