@@ -72,7 +72,7 @@ class ViewController: UIViewController, Alertable {
             
         }
         
-        
+       
        
     }
     
@@ -126,7 +126,7 @@ class ViewController: UIViewController, Alertable {
             
         })
         
-        
+        connectUserAndDriverForTrip()
     }
     
     
@@ -183,7 +183,23 @@ class ViewController: UIViewController, Alertable {
         })
     }
     
-    
+    func connectUserAndDriverForTrip() {
+        DataService.instance.userIsDriver(userKey: self.currentUserId!, handler: { (status) in
+            if !status {
+                DataService.instance.REF_TRIPS.child(self.currentUserId!).observe(.value, with: { (tripSnapshot) in
+                    
+                    let tripDict = tripSnapshot.value as? Dictionary<String, AnyObject>
+                    if let tripDict = tripDict, tripDict["tripAccepted"] as? Bool == true {
+                        print("Trip is accepted")
+                        self.removeOverlaysAndAnnotations(forDriver: true, forPassengers: true)
+                    } else {
+                        print("Trip is not accepted")
+                    }
+                    
+                })
+            }
+        })
+    }
     
 }
 

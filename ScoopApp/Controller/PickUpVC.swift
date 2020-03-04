@@ -51,7 +51,7 @@ class PickUpVC: UIViewController {
     }
     
     @IBAction func cancelButtonActionPressed(_ sender: Any) {
-        pickupVCDelegate?.pickupViewController(controller: self, itemForPolyline: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func acceptTripButtonPressed(_ sender: Any) {
