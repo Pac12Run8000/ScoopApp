@@ -191,7 +191,31 @@ class ViewController: UIViewController, Alertable {
                     let tripDict = tripSnapshot.value as? Dictionary<String, AnyObject>
                     if let tripDict = tripDict, tripDict["tripAccepted"] as? Bool == true {
                         print("Trip is accepted")
+                        let driverId = tripDict["driverKey"] ?? nil
                         self.removeOverlaysAndAnnotations(forDriver: true, forPassengers: true)
+                        if let pickUpCoordinateArray = tripDict["pickUpCoordinate"] as? NSArray, let pickUpCoordinate = CLLocationCoordinate2D(latitude: pickUpCoordinateArray[0] as! CLLocationDegrees, longitude: pickUpCoordinateArray[1] as! CLLocationDegrees) as? CLLocationCoordinate2D, let pickUpPlaceMark = MKPlacemark(coordinate: pickUpCoordinate) as? MKPlacemark {
+                            
+                            DataService.instance.REF_DRIVERS.observeSingleEvent(of: .value, with: { (driverSnapshot) in
+                                if let driverSnapshot = driverSnapshot.children.allObjects as? [DataSnapshot] {
+                                    for driver in driverSnapshot {
+                                        
+                                        if let driverId = driverId as? String, driver.key == driverId, let driverCoordinateArray = driver.childSnapshot(forPath: "coordinate").value as? NSArray, let driverCoordinate = CLLocationCoordinate2D(latitude: driverCoordinateArray[0] as! CLLocationDegrees, longitude: driverCoordinateArray[1] as! CLLocationDegrees) as? CLLocationCoordinate2D, let driverPlaceMark = MKPlacemark(coordinate: driverCoordinate) as? MKPlacemark {
+                                            
+//                                            print("Driver:\(driverId) will pick up passenger \(self.currentUserId) at:\(pickUpCoordinate)", "driverCoordinate:\(driverCoordinate)")
+                                            let passengerAnnotation = PassengerAnnotation(coordinate: pickUpCoordinate, key: self.currentUserId!)
+                                            let driverAnnotation = DriverAnnotation(coordinate: driverCoordinate, key: driverId)
+                                            self.mapView.addAnnotations([passengerAnnotation, driverAnnotation])
+                                            if let pickUpMapItem = MKMapItem(placemark: pickUpPlaceMark) as? MKMapItem, let driverMapItem = MKMapItem(placemark: driverPlaceMark) as? MKMapItem {
+                                                self.searchMapKitForResultsWithPolyline(originMapItem: pickUpMapItem, destinationMapItem: driverMapItem)
+                                            }
+                                            
+                                        }
+
+                                    }
+                                }
+                            })
+                            
+                        }
                     } else {
                         print("Trip is not accepted")
                     }
